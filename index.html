@@ -1201,20 +1201,24 @@
 <h2 id="3-编写博客"><a href="#3-编写博客" class="headerlink" title="3. 编写博客"></a>3. 编写博客</h2><p>3.1 创建博客<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init username.github.io</div></pre></td></tr></table></figure></p>
 <p>3.2 配置主题</p>
 <p>3.2.1 安装主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd username.github.io</div><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<p><a href="https://hexo.io/themes/" target="_blank" rel="external">更多主题</a></p>
-<p>3.2.2 基础配置</p>
-<p>打开文件位置username.github.io/_config.yml修改几个键值对，下面把几个必须设置的列出来按需求修改。</p>
-<p>#注意配置的键值之间一定要有空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">title: dimsky 的 9 维空间    //你博客的名字</div><div class="line">author: dimsky  //你的名字</div><div class="line">language: zh-Hans    //语言 中文</div><div class="line">theme: next   //刚刚安装的主题名称</div><div class="line">deploy:</div><div class="line">  type: git    //使用Git 发布</div><div class="line">  repo: https://github.com/username/username.github.io.git    // 刚创建的Github仓库</div></pre></td></tr></table></figure></p>
-<p><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">更多设置</a></p>
-<p>3.2.3 主题配置</p>
-<p>主题配置文件在username.github.io/themes/next/_config.yml中修改。<br><a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="external">更多配置</a></p>
-<p>3.3 写文章</p>
-<p>在username.github.io/source/_posts下创建你的博客，命名“搭建GitHub个人博客.md”。既然是搭建GitHub个人博客，那么就用GitHub的编辑器 <a href="https://atom.io" target="_blank" rel="external">Atom</a>吧。<br>markdown语法：(<a href="http://www.appinn.com/markdown/#header" target="_blank" rel="external">http://www.appinn.com/markdown/#header</a>)</p>
+<p><a href="https://hexo.io/themes/" target="_blank" rel="external">查看更多主题</a></p>
+<p>3.2.2 基础配置<br>打开文件_config.yml修改几个键值对，下面把几个必须设置的列出来按需求修改。注意配置的键值之间一定要有空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">title: dimsky 的 9 维空间    //你博客的名字</div><div class="line">author: dimsky  //你的名字</div><div class="line">language: zh-Hans    //语言 中文</div><div class="line">theme: next   //刚刚安装的主题名称</div><div class="line">deploy:</div><div class="line">  type: git    //使用Git 发布</div><div class="line">  repo: https://github.com/username/username.github.io.git //刚创建的Github仓库</div></pre></td></tr></table></figure></p>
+<p><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">查看更多设置</a></p>
+<p>3.2.3 如何添加“tags”页面、“categorys”页面、“about”页面等。<br>新增“tags”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page tags</div></pre></td></tr></table></figure></p>
+<p>新增“categorys”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page categories</div></pre></td></tr></table></figure></p>
+<p>新增“about”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page about</div></pre></td></tr></table></figure></p>
+<p>修改_config.yml菜单配置为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">  home: /archives</div><div class="line">  categories: /categories</div><div class="line">  about: /about</div><div class="line">  archives: /archives</div><div class="line">  tags: /tags</div></pre></td></tr></table></figure></p>
+<p>参考：<a href="http://theme-next.iissnan.com/theme-settings.html#tags-page" target="_blank" rel="external">http://theme-next.iissnan.com/theme-settings.html#tags-page</a></p>
+<p>3.2.4 主题配置<br>主题配置文件在username.github.io/themes/next/_config.yml中修改。<br><a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="external">更多配置</a></p>
+<p>3.3 写文章<br>在username.github.io/source/_posts下创建你的博客，命名“搭建GitHub个人博客.md”。既然是搭建GitHub个人博客，那么就用GitHub的编辑器 <a href="https://atom.io" target="_blank" rel="external">Atom</a>吧。<br>markdown语法：(<a href="http://www.appinn.com/markdown/#header" target="_blank" rel="external">http://www.appinn.com/markdown/#header</a>)</p>
 <p>3.4 本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd username.github.io</div><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
 <p>测试服务启动，浏览器中输入<a href="https://localhost:4000" target="_blank" rel="external">https://localhost:4000</a> 就可以预览了。</p>
-<h2 id="4-发布博客"><a href="#4-发布博客" class="headerlink" title="4. 发布博客"></a>4. 发布博客</h2><p>4.1 安装发布工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<ol>
+<li>发布博客<br>4.1 安装发布工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+</li>
+</ol>
 <p>4.2 发布<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</div></pre></td></tr></table></figure></p>
-<h2 id="5-更多有趣的插件"><a href="#5-更多有趣的插件" class="headerlink" title="5 更多有趣的插件"></a>5 更多有趣的插件</h2><p><a href="https://hexo.io/plugins/" target="_blank" rel="external">Hexo插件</a></p>
+<h2 id="5-更多有趣的插件"><a href="#5-更多有趣的插件" class="headerlink" title="5 更多有趣的插件"></a>5 更多有趣的插件</h2><p><a href="https://hexo.io/plugins/" target="_blank" rel="external">Hexo更多插件</a></p>
 
           
         
