@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="UITextField," />
+  <meta name="keywords" content="sonar," />
 
 
 
@@ -84,25 +84,18 @@
 
 
 
-<meta name="description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
+<meta name="description" content="前面章节提到SonarQube支持的语言多达20+种，对这些语言的支持都是通过插件(plugin)形式，前面章节介绍了怎么通过SonarQube安装官方支持的一些语言(Java、JavaScript、PHP)的插件，但是对于Swift和Objective-c语言的插件需要licence才能使用，价格不菲，例如SonarCFamily插件就需要$5000/year。不过网上也已经有开源的能够支持">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS7中UITextField切换中文时某些协议方法无响应">
-<meta property="og:url" content="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/index.html">
+<meta property="og:title" content="SonarQube应用之Objective-c">
+<meta property="og:url" content="http://yoursite.com/2017/04/07/SonarQube应用之Objective-c/index.html">
 <meta property="og:site_name" content="三味猪屋">
-<meta property="og:description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
-<meta property="og:updated_time" content="2017-04-04T13:06:37.000Z">
+<meta property="og:description" content="前面章节提到SonarQube支持的语言多达20+种，对这些语言的支持都是通过插件(plugin)形式，前面章节介绍了怎么通过SonarQube安装官方支持的一些语言(Java、JavaScript、PHP)的插件，但是对于Swift和Objective-c语言的插件需要licence才能使用，价格不菲，例如SonarCFamily插件就需要$5000/year。不过网上也已经有开源的能够支持">
+<meta property="og:image" content="http://yoursite.com/images/SonarOBJC/sonar-scanner_install.png">
+<meta property="og:updated_time" content="2017-04-07T01:06:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS7中UITextField切换中文时某些协议方法无响应">
-<meta name="twitter:description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
+<meta name="twitter:title" content="SonarQube应用之Objective-c">
+<meta name="twitter:description" content="前面章节提到SonarQube支持的语言多达20+种，对这些语言的支持都是通过插件(plugin)形式，前面章节介绍了怎么通过SonarQube安装官方支持的一些语言(Java、JavaScript、PHP)的插件，但是对于Swift和Objective-c语言的插件需要licence才能使用，价格不菲，例如SonarCFamily插件就需要$5000/year。不过网上也已经有开源的能够支持">
+<meta name="twitter:image" content="http://yoursite.com/images/SonarOBJC/sonar-scanner_install.png">
 
 
 
@@ -130,13 +123,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/07/SonarQube应用之Objective-c/"/>
 
 
 
 
 
-  <title> iOS7中UITextField切换中文时某些协议方法无响应 | 三味猪屋 </title>
+  <title> SonarQube应用之Objective-c | 三味猪屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/07/SonarQube应用之Objective-c/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="花生-sniper">
@@ -291,7 +284,7 @@
             
             
               
-                iOS7中UITextField切换中文时某些协议方法无响应
+                SonarQube应用之Objective-c
               
             
           </h1>
@@ -304,8 +297,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T10:13:52+08:00">
-                2016-11-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-07T09:06:50+08:00">
+                2017-04-07
               </time>
             
 
@@ -323,8 +316,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
+                  <a href="/categories/sonar/" itemprop="url" rel="index">
+                    <span itemprop="name">sonar</span>
                   </a>
                 </span>
 
@@ -358,14 +351,11 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;</div></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>1、利用通知中心监听UITextFieldTextDidChangeNotification。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[[NSNotificationCenter defaultCenter]addObserver:self</div><div class="line">                                        selector:@selector(textFiledEditChanged:)</div><div class="line">                                            name:UITextFieldTextDidChangeNotification</div><div class="line">                                          object:self];</div><div class="line"></div><div class="line">- (void)textFiledEditChanged:(NSNotification *)notification</div><div class="line">&#123;</div><div class="line">    if ([notification.object isKindOfClass:[EzvizTokenTextField class]]) &#123;</div><div class="line">        EzvizTokenTextField *textField = notification.object;</div><div class="line">        UITextRange *selectedRange = [textField markedTextRange];</div><div class="line">        //获取高亮部分</div><div class="line">        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];</div><div class="line">        if (!position) &#123;</div><div class="line">            self.ezvizTokenTextFieldTextLength = [textField.text length];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当键盘中有mark的中文字符时，则根据UITextField实例方法markedTextRange可以获取开始位置以及长度，此时，只要没有选中被mark的字符时，textFiled.text 的 length是不会改变的。只有当选中被mark的字符时，markedTextRange返回的开始位置以及长度为0，则UITextPosition则为nil，此时说明textField.text 的 length改变。</p>
-<p>2、通过KVO监听textField.text 的length。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[self addObserver:self</div><div class="line">       forKeyPath:@&quot;ezvizTokenTextFieldTextLength&quot;</div><div class="line">          options:NSKeyValueObservingOptionNew</div><div class="line">          context:NULL];</div><div class="line"></div><div class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context</div><div class="line">&#123;</div><div class="line">    if (object == self &amp;&amp; [keyPath isEqualToString:@&quot;ezvizTokenTextFieldTextLength&quot;]) &#123;</div><div class="line">        //DDLogInfo(@&quot;ezvizTokenTextFieldTextLength: %d&quot;, self.ezvizTokenTextFieldTextLength);</div><div class="line">        if (self.ezvizTokenTextFieldTextLength) &#123;</div><div class="line">            if (delegate &amp;&amp; [delegate respondsToSelector:@selector(textFieldDidEndChanged:)]) &#123;</div><div class="line">                [delegate textFieldDidEndChanged:self];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>从而可以达到在iOS7下监听UITextField输入框内字符变化。</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>前面章节提到SonarQube支持的语言多达20+种，对这些语言的支持都是通过插件(plugin)形式，前面章节介绍了怎么通过SonarQube安装官方支持的一些语言(Java、JavaScript、PHP)的插件，但是对于Swift和Objective-c语言的插件需要licence才能使用，价格不菲，例如SonarCFamily插件就需要$5000/year。不过网上也已经有开源的能够支持Swift或者Objective-c语言的插件。</p>
+<p>1、sonar-scanner(低版本也可以使用sonar-runner)<br>2、xcpretty<br>3、OCLint(SwiftLint支持Swift)<br>4、slather<br>5、lizard<br>6、gcovr</p>
+<p>1、sonar-scanner安装：<br>sonar-scanner是sonarQube默认的分析启动器。<br>安装如下：<br><img src="/images/SonarOBJC/sonar-scanner_install.png" alt=""><br>2、xcpretty安装：<br>xcpretty是为xcodebuild命令提供的附加功能，可以对整个编译构建过程中产生的日志进行统计，并生成格式化报表。<br>项目地址：<a href="https://github.com/supermarin/xcpretty" target="_blank" rel="external">https://github.com/supermarin/xcpretty</a><br>由于我们自己的搭建的自动化构建工具是基于fastlane搭建的，fastlane对xcodebuild编译过程中产生的日志格式化输出已经非常出色了。<br>3、OCLint安装：<br>OCLint是一个主要针对c、c++、Objective-c的静态代码分析工具<br>项目地址：<a href="https://github.com/oclint/oclint" target="_blank" rel="external">https://github.com/oclint/oclint</a><br>4、slather安装：<br>slather是为Xcode项目生成测试覆盖率报告并将其挂接到CI中。是统计测试覆盖率的工具，可以生成报告日志和静态网页报表对测试覆盖率进行分析。<br>项目地址：<a href="https://github.com/SlatherOrg/slather" target="_blank" rel="external">https://github.com/SlatherOrg/slather</a><br>5、lizard安装：<br>lizard是一个代码复杂度分析工具。<br>项目地址：<a href="https://github.com/terryyin/lizard" target="_blank" rel="external">https://github.com/terryyin/lizard</a><br>6、gcover安装：<br>gcover是代码覆盖率分析工具。<br>项目地址：<a href="http://gcovr.com" target="_blank" rel="external">http://gcovr.com</a><br>参考：<a href="http://www.jianshu.com/p/9ae446d76271" target="_blank" rel="external">http://www.jianshu.com/p/9ae446d76271</a></p>
+<p>关于代码覆盖率工具以后可以专门用一章节来说道说道。<br>Code Coverage：苹果将其作为Xcode7的一个特性集成进去了。<br>参考:<a href="https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/07-code_coverage.html" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/DeveloperTools/Conceptual/testing_with_xcode/chapters/07-code_coverage.html</a><br>XcodeCoverage:<a href="https://github.com/jonreid/XcodeCoverage" target="_blank" rel="external">https://github.com/jonreid/XcodeCoverage</a></p>
+<p>参考：<br><a href="https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner" target="_blank" rel="external">https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner</a><br><a href="http://oai4nfrij.bkt.clouddn.com/OCLint.html" target="_blank" rel="external">http://oai4nfrij.bkt.clouddn.com/OCLint.html</a><br><a href="https://www.ibm.com/developerworks/cn/java/j-lo-sonar/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-sonar/</a><br><a href="http://www.jianshu.com/p/f58e89573d33" target="_blank" rel="external">http://www.jianshu.com/p/f58e89573d33</a><br><a href="http://www.infoq.com/cn/articles/effective-code-reviews?utm_source=infoq_en&amp;utm_medium=link_on_en_item&amp;utm_campaign=item_in_other_langs" target="_blank" rel="external">http://www.infoq.com/cn/articles/effective-code-reviews?utm_source=infoq_en&amp;utm_medium=link_on_en_item&amp;utm_campaign=item_in_other_langs</a><br><a href="https://www.ibm.com/developerworks/cn/opensource/os-sonarqube/" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/opensource/os-sonarqube/</a></p>
 
       
     </div>
@@ -389,7 +379,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UITextField/" rel="tag"># UITextField</a>
+            <a href="/tags/sonar/" rel="tag"># sonar</a>
           
         </div>
       
@@ -398,8 +388,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/30/搭建GitHub个人博客/" rel="next" title="GitHub博客搭建">
-                <i class="fa fa-chevron-left"></i> GitHub博客搭建
+              <a href="/2017/04/06/搭建自动化代码审查工具SonarQube实践/" rel="next" title="搭建自动化代码审查工具SonarQube实践">
+                <i class="fa fa-chevron-left"></i> 搭建自动化代码审查工具SonarQube实践
               </a>
             
           </div>
@@ -407,10 +397,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/30/objc_msgSend 的正确使用姿势/" rel="prev" title="objc_msgSend 的正确使用姿势">
-                objc_msgSend 的正确使用姿势 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
