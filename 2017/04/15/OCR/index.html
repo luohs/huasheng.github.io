@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/images/Tesseract/tesseract_show_language_list.png">
 <meta property="og:image" content="http://yoursite.com/images/Tesseract/tesseract_show_help_use.png">
 <meta property="og:image" content="http://yoursite.com/images/Tesseract/tesseract_parameters.png">
-<meta property="og:updated_time" content="2017-04-16T04:17:24.000Z">
+<meta property="og:updated_time" content="2017-04-16T07:33:55.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OCR之Tesseract安装和使用">
 <meta name="twitter:description" content="OCR(Optical Character Recognition):光学字符识别，是指对文本资料进行扫描，然后对图像文件进行分析处理，获取文字和版面信息的过程。Tesseract:Google开源的OCR识别引擎。现已托管在GitHub上，大家有兴趣可以上Github上Star或Frok该项目。Tesseract在Mac OSX上安装：以上图片显示的是使用brew安装所有语言包，如果想要安装">
@@ -367,7 +367,7 @@
 <p><img src="/images/Tesseract/tesseract_show_help_use.png" alt=""><br>5、额外参数<br>通过上图help命令注意到命令<code>tesseract imagename|stdin outputbase|stdout [options...] [configfile...]</code>中<code>[options...]</code>除了参数<code>-l LANG</code>还有其他几个参数可以设置。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">--tessdata-dir PATH   Specify the location of tessdata path.</div><div class="line">--user-words PATH     Specify the location of user words file.</div><div class="line">--user-patterns PATH  Specify the location of user patterns file.</div><div class="line">-l LANG[+LANG]        Specify language(s) used for OCR.</div><div class="line">-c VAR=VALUE          Set value for config variables.</div><div class="line">                      Multiple -c arguments are allowed.</div><div class="line">--psm NUM             Specify page segmentation mode.</div><div class="line">--oem NUM             Specify OCR Engine mode.</div></pre></td></tr></table></figure></p>
 <p><code>--psm NUM</code>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">Page segmentation modes:</div><div class="line">  0    Orientation and script detection (OSD) only.</div><div class="line">  1    Automatic page segmentation with OSD.</div><div class="line">  2    Automatic page segmentation, but no OSD, or OCR.</div><div class="line">  3    Fully automatic page segmentation, but no OSD. (Default)</div><div class="line">  4    Assume a single column of text of variable sizes.</div><div class="line">  5    Assume a single uniform block of vertically aligned text.</div><div class="line">  6    Assume a single uniform block of text.</div><div class="line">  7    Treat the image as a single text line.</div><div class="line">  8    Treat the image as a single word.</div><div class="line">  9    Treat the image as a single word in a circle.</div><div class="line"> 10    Treat the image as a single character.</div><div class="line"> 11    Sparse text. Find as much text as possible in no particular order.</div><div class="line"> 12    Sparse text with OSD.</div><div class="line"> 13    Raw line. Treat the image as a single text line,</div><div class="line">			bypassing hacks that are Tesseract-specific.</div></pre></td></tr></table></figure></p>
 <p><code>--oem NUM</code>参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">OCR Engine modes:</div><div class="line">  0    Original Tesseract only.</div><div class="line">  1    Cube only.</div><div class="line">  2    Tesseract + cube.</div><div class="line">  3    Default, based on what is available.</div></pre></td></tr></table></figure></p>
-<p><code>-c VAR=VALUE</code>参数：<br>具体参数可以通过<code>tesseract --print-parameters</code>查看。<br><img src="/images/Tesseract/tesseract_parameters.png" alt=""><br>参数的使用有两种方式:<br>方式1:<code>-c VAR=VALUE</code><br>使用 -c 选项来设定单项参数的值，比如:<br><code>tesseract xxx.png xxx -l chi_sim -c language_model_ngram_on=1</code><br>允许使用多个 -c 选项来设置多个参数的值。<br>方式2:<code>[configfile...]</code><br>将多项参数设置写入文件，然后在识别时使用该文件，比如:<br>tesseract xxx.png xxx -l chi_sim tess.conf<br>需要注意的是，如果使用配置文件，用作参数的配置文件名要放在最后面——这里也支持多个配置文件，但它们必须要在最后面。假如我有两个配置文件 tess_1.conf 和 tess_2.conf，那么这样是正确的:<br><code>tesseract xxx.png xxx -l chi_sim tess_1.conf tess_2.conf</code><br>而这样则是错误的:<br><code>tesseract xxx.png xxx tess_1.conf -l chi_sim tess_2.conf</code><br><a href="http://www.sk-spell.sk.cx/tesseract-ocr-parameters-in-302-version" target="_blank" rel="external">这里</a>提供了部分参数的用处说明。<br><a href="http://tesseract-ocr.github.io/index.html" target="_blank" rel="external">官方文档</a>也提供了，不过需要花点时间去找。</p>
+<p><code>-c VAR=VALUE</code>参数：<br>具体参数可以通过<code>tesseract --print-parameters</code>查看。<br><img src="/images/Tesseract/tesseract_parameters.png" alt=""><br>参数的使用有两种方式:<br>方式1:<code>-c VAR=VALUE</code><br>使用 -c 选项来设定单项参数的值，比如:<br><code>tesseract xxx.png xxx -l chi_sim -c language_model_ngram_on=1</code><br>允许使用多个 -c 选项来设置多个参数的值。<br>方式2:<code>[configfile...]</code><br>将多项参数设置写入文件，然后在识别时使用该文件，比如:<br>tesseract xxx.png xxx -l chi_sim tess.conf<br>需要注意的是，如果使用配置文件，用作参数的配置文件名要放在最后面——这里也支持多个配置文件，但它们必须要在最后面。假如我有两个配置文件 tess_1.conf 和 tess_2.conf，那么这样是正确的:<br><code>tesseract xxx.png xxx -l chi_sim tess_1.conf tess_2.conf</code><br>而这样则是错误的:<br><code>tesseract xxx.png xxx tess_1.conf -l chi_sim tess_2.conf</code><br><a href="http://www.sk-spell.sk.cx/tesseract-ocr-parameters-in-302-version" target="_blank" rel="external">这里</a>提供了部分参数的用处说明。<br><a href="http://tesseract-ocr.github.io/index.html" target="_blank" rel="external">官方文档</a>也提供了，不过需要花点时间去找。<br>参考：<br><a href="https://github.com/tesseract-ocr/tesseract" target="_blank" rel="external">https://github.com/tesseract-ocr/tesseract</a></p>
 
       
     </div>
@@ -409,6 +409,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/04/16/OCR_2/" rel="prev" title="OCR之OpenCV在Mac OSX上安装">
+                OCR之OpenCV在Mac OSX上安装 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -467,7 +471,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">9</span>
+              <span class="site-state-item-count">10</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -484,7 +488,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
