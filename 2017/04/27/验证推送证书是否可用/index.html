@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Xcode," />
+  <meta name="keywords" content="apns," />
 
 
 
@@ -84,20 +84,24 @@
 
 
 
-<meta name="description" content="随着Xcode8的发布，Xcode默认最低支持的iOS版本为8.0，所以想调试iOS8以下真机就比较头痛。那么本文就以Xoce8支持iOS7为例子来介绍高版本Xcode如何支持低版本系统真机调试。一、首先得有低版本系统的SDK。获取低版本系统的SDK有三种方式：方式1:在升级Xcode之前，请前往1/Applications/Xcode.app/Contents/Developer/Platf">
+<meta name="description" content="iOS有时候测试或者线上收不到推送消息，大家就会首先将问题抛给iOS开发人员，但是推送消息收不到有很多种原因，只要制作的证书没有问题，跟iOS开发人员没有毛线关系啊。那么如何去证明我们的证书制作的是没有问题的呢？有两个办法可以来验证：方式一、写一个模拟服务端的推送程序，模拟推送一条消息。但是这种办法有个弊端，当苹果的APNs挂了、延迟、国内被墙等时，也是无法收到推送消息，所以无法判断是否是推送">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xcode高版本支持低版本系统真机调试">
-<meta property="og:url" content="http://yoursite.com/2017/04/26/Xcode_support_low_sdks/index.html">
+<meta property="og:title" content="关于如何验证制作的推送证书可用">
+<meta property="og:url" content="http://yoursite.com/2017/04/27/验证推送证书是否可用/index.html">
 <meta property="og:site_name" content="三味猪屋">
-<meta property="og:description" content="随着Xcode8的发布，Xcode默认最低支持的iOS版本为8.0，所以想调试iOS8以下真机就比较头痛。那么本文就以Xoce8支持iOS7为例子来介绍高版本Xcode如何支持低版本系统真机调试。一、首先得有低版本系统的SDK。获取低版本系统的SDK有三种方式：方式1:在升级Xcode之前，请前往1/Applications/Xcode.app/Contents/Developer/Platf">
-<meta property="og:image" content="http://yoursite.com/images/Xcode支持低版本真机调试/xcode-install.png">
-<meta property="og:image" content="http://yoursite.com/images/Xcode支持低版本真机调试/SDKs_dir.png">
-<meta property="og:image" content="http://yoursite.com/images/Xcode支持低版本真机调试/modify_SDKSetting.png">
-<meta property="og:updated_time" content="2017-04-26T12:26:57.000Z">
+<meta property="og:description" content="iOS有时候测试或者线上收不到推送消息，大家就会首先将问题抛给iOS开发人员，但是推送消息收不到有很多种原因，只要制作的证书没有问题，跟iOS开发人员没有毛线关系啊。那么如何去证明我们的证书制作的是没有问题的呢？有两个办法可以来验证：方式一、写一个模拟服务端的推送程序，模拟推送一条消息。但是这种办法有个弊端，当苹果的APNs挂了、延迟、国内被墙等时，也是无法收到推送消息，所以无法判断是否是推送">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/APNs_server_demo_java.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/export_apns_cer.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/export_apns_cer_2.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/export_apns_private_key_1.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/ping_apns.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/verify_pem_1.png">
+<meta property="og:image" content="http://yoursite.com/images/验证推送证书/verify_pem_2.png">
+<meta property="og:updated_time" content="2017-04-27T09:05:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xcode高版本支持低版本系统真机调试">
-<meta name="twitter:description" content="随着Xcode8的发布，Xcode默认最低支持的iOS版本为8.0，所以想调试iOS8以下真机就比较头痛。那么本文就以Xoce8支持iOS7为例子来介绍高版本Xcode如何支持低版本系统真机调试。一、首先得有低版本系统的SDK。获取低版本系统的SDK有三种方式：方式1:在升级Xcode之前，请前往1/Applications/Xcode.app/Contents/Developer/Platf">
-<meta name="twitter:image" content="http://yoursite.com/images/Xcode支持低版本真机调试/xcode-install.png">
+<meta name="twitter:title" content="关于如何验证制作的推送证书可用">
+<meta name="twitter:description" content="iOS有时候测试或者线上收不到推送消息，大家就会首先将问题抛给iOS开发人员，但是推送消息收不到有很多种原因，只要制作的证书没有问题，跟iOS开发人员没有毛线关系啊。那么如何去证明我们的证书制作的是没有问题的呢？有两个办法可以来验证：方式一、写一个模拟服务端的推送程序，模拟推送一条消息。但是这种办法有个弊端，当苹果的APNs挂了、延迟、国内被墙等时，也是无法收到推送消息，所以无法判断是否是推送">
+<meta name="twitter:image" content="http://yoursite.com/images/验证推送证书/APNs_server_demo_java.png">
 
 
 
@@ -125,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/04/26/Xcode_support_low_sdks/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/27/验证推送证书是否可用/"/>
 
 
 
 
 
-  <title> Xcode高版本支持低版本系统真机调试 | 三味猪屋 </title>
+  <title> 关于如何验证制作的推送证书可用 | 三味猪屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -262,7 +266,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/Xcode_support_low_sdks/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/27/验证推送证书是否可用/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="花生-sniper">
@@ -286,7 +290,7 @@
             
             
               
-                Xcode高版本支持低版本系统真机调试
+                关于如何验证制作的推送证书可用
               
             
           </h1>
@@ -299,8 +303,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T19:30:01+08:00">
-                2017-04-26
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T16:11:47+08:00">
+                2017-04-27
               </time>
             
 
@@ -318,8 +322,8 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Xcode/" itemprop="url" rel="index">
-                    <span itemprop="name">Xcode</span>
+                  <a href="/categories/apns/" itemprop="url" rel="index">
+                    <span itemprop="name">apns</span>
                   </a>
                 </span>
 
@@ -353,13 +357,12 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>随着Xcode8的发布，Xcode默认最低支持的iOS版本为8.0，所以想调试iOS8以下真机就比较头痛。那么本文就以Xoce8支持iOS7为例子来介绍高版本Xcode如何支持低版本系统真机调试。<br>一、首先得有低版本系统的SDK。获取低版本系统的SDK有三种方式：<br>方式1:在升级Xcode之前，请前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p>拷贝将要被摒弃的SDK。<br>方式2:伸手党方式从好心人那里下载人家已经保存下来的SDK。<br>如：<a href="https://github.com/duoduoxiao/iOS7SDK.git" target="_blank" rel="external">https://github.com/duoduoxiao/iOS7SDK.git</a><br>方式3:安装低版本的Xcode，安装完之后前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p>取出SDK或者直接使用低版本Xcode进行调试。<br>安装低版本Xcode：<br>1、下载dmg安装；<br>2、通过ruby插件安装；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ gem install xcode-install</div><div class="line">$ xcversion install 7.3.1</div></pre></td></tr></table></figure></p>
-<p><img src="/images/Xcode支持低版本真机调试/xcode-install.png" alt=""><br>二、其次就是将低版本的SDK拷贝到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p><img src="/images/Xcode支持低版本真机调试/SDKs_dir.png" alt=""><br>三、修改 SDKSettings.plist<br>前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/SDKSettings.plist</div></pre></td></tr></table></figure></p>
-<p>增加将要支持的SDK。<br><img src="/images/Xcode支持低版本真机调试/modify_SDKSetting.png" alt=""><br>小技巧：<code>SDKSettings.plist</code>在文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk</div></pre></td></tr></table></figure></p>
-<p>中是被锁保护了，所以想修改它的话可以将其拷贝到其他文件夹修改完之后再覆盖原文件夹中的<code>SDKSettings.plist</code>。<br>四、重启Xcode</p>
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>iOS有时候测试或者线上收不到推送消息，大家就会首先将问题抛给iOS开发人员，但是推送消息收不到有很多种原因，只要制作的证书没有问题，跟iOS开发人员没有毛线关系啊。<br>那么如何去证明我们的证书制作的是没有问题的呢？<br>有两个办法可以来验证：<br>方式一、写一个模拟服务端的推送程序，模拟推送一条消息。但是这种办法有个弊端，当苹果的APNs挂了、延迟、国内被墙等时，也是无法收到推送消息，所以无法判断是否是推送证书有问题。<br>我们也提供了一个demo，如下图：<br><img src="/images/验证推送证书/APNs_server_demo_java.png" alt=""><br>方式二、通过openssl命令验证<br>1、导出.cer证书文件<br>keychain中导出推送证书时要选中证书文件，不要展开private key。注意导出为.cer文件，命名为：aps_development.cer。<br><img src="/images/验证推送证书/export_apns_cer.png" alt=""><br><img src="/images/验证推送证书/export_apns_cer_2.png" alt=""><br>2、导出.p12私钥文件<br>keychain中选中推送证书的私钥文件，注意导出为.p12文件，命名为：aps_push.p12<br><img src="/images/验证推送证书/export_apns_private_key_1.png" alt=""><br>3、转换为.pem文件<br>上面两个文件都要先转换为.pem文件，最终要将转换后的两个.pem文件合并为一个.pem文件。<br>a、将aps_development.cer转换为.pem文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl x509 -in aps_development.cer -inform der -out aps_development.pem</div></pre></td></tr></table></figure></p>
+<p>b、将aps_push.p12转换为.pem文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl pkcs12 -nocerts -out aps_push.pem -in aps_push.p12</div></pre></td></tr></table></figure></p>
+<p>这里首先需要我们输入在第二步导出私钥文件中定义的密码。其次，还需要为新生成的pem文件设置一个密码。此密码为上传PUSH平台所用的密码！所以，推荐所有密码一致，以防混淆。<br>4、合并.pem文件<br>合并上一步得到的两个文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat aps_development.pem aps_push.pem &gt; push.pem</div></pre></td></tr></table></figure></p>
+<p>5、测试<br>为了测试证书是否工作，执行下面的命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">telnet gateway.sandbox.push.apple.com 2195</div></pre></td></tr></table></figure></p>
+<p>它将尝试发送一个规则的，不加密的连接到APNS服务。如果看到下面返回，即能够到达APNS。按下Ctrl+C关闭连接。<br><img src="/images/验证推送证书/ping_apns.png" alt=""><br>如出现上图所示则表明是APNs是可访问的。<br>测试证书是否正确：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">openssl s_client -connect gateway.sandbox.push.apple.com:2195 -cert push.pem -key push.pem</div></pre></td></tr></table></figure></p>
+<p>首先会要求你输入密码，即私钥那一步生成的密码。<br><img src="/images/验证推送证书/verify_pem_1.png" alt=""><br><img src="/images/验证推送证书/verify_pem_2.png" alt=""><br>如出现上图所示则表明证书有效，连接成功。</p>
 
       
     </div>
@@ -383,7 +386,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Xcode/" rel="tag"># Xcode</a>
+            <a href="/tags/apns/" rel="tag"># apns</a>
           
         </div>
       
@@ -392,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/21/iOS的自动化打包/" rel="next" title="iOS的自动化打包">
-                <i class="fa fa-chevron-left"></i> iOS的自动化打包
+              <a href="/2017/04/26/Xcode_support_low_sdks/" rel="next" title="Xcode高版本支持低版本系统真机调试">
+                <i class="fa fa-chevron-left"></i> Xcode高版本支持低版本系统真机调试
               </a>
             
           </div>
@@ -401,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/27/验证推送证书是否可用/" rel="prev" title="关于如何验证制作的推送证书可用">
-                关于如何验证制作的推送证书可用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
