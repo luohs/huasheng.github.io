@@ -256,6 +256,150 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/31/iOS逆向实践/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/03/31/iOS逆向实践/" itemprop="url">
+                  iOS逆向实践
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-31T09:47:27+08:00">
+                2017-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><h2 id="iOS设备越狱"><a href="#iOS设备越狱" class="headerlink" title="iOS设备越狱"></a>iOS设备越狱</h2><p>工具：PP助手、TaiG、evasi0n (<a href="http://evasi0n.com" target="_blank" rel="external">http://evasi0n.com</a>)<br>设备：iPhone6，iOS8.3<br>由于我使用了PP助手对手机设备进行越狱操作的，没有什么技术性，这里就暂时略过，以后再研究下使用TaiG、evasi0n等工具进行越狱再补上。</p>
+<h2 id="查看越狱iOS设备APP文件夹"><a href="#查看越狱iOS设备APP文件夹" class="headerlink" title="查看越狱iOS设备APP文件夹"></a>查看越狱iOS设备APP文件夹</h2><p>工具：PP助手、iTools、iFunBox<br>iOS8.3之后由于苹果加强了沙盒的安全性，导致工具无法直接查看到APP的沙盒文件夹结构，所以要查看iOS设备沙盒文件就需要进行越狱之后使用文件管理工具查看。<br>文件查看工具查看越狱后的iOS设备文件夹结构如下：<br><img src="/images/iOS逆向实践/iOS_reverse_watch_divice_dir.png" alt=""><br>如果想要查看APP沙盒文件夹结构，需要将iPhone越狱后再安装AFC2。<br>步骤如下：<br>1、打开Cydia<br>2、打开“搜索”Tab项<br>3、输入“Apple File Conduit ‘2’”<br>4、安装“Apple File Conduit ‘2’”<br>此时可通过文件查看工具查看APP沙盒文件夹结构如下：<br><img src="/images/iOS逆向实践/iOS_reverse_watch_app_dir.png" alt=""></p>
+<h2 id="远程连接iOS设备"><a href="#远程连接iOS设备" class="headerlink" title="远程连接iOS设备"></a>远程连接iOS设备</h2><p>工具：Terminal.app<br>1、手机中打开Cydia，打开“搜索”Tab项，输入“OpenSSH’”，安装“OpenSSH”<br>2、确保手机已经连接了WIFI并且你的手机的WIFI<br>和你的电脑要在同一个局域网内,打开终端输入:<br>ssh root@xx.xx.xx.xx,(xx.xx.xx.xx)为你的手机的IP地址—&gt;Enter<br>3、接着会提示你输入password:<br>这里的密码一般情况下是alpine,但是如果你更改过的话就用你更改的[这里的密码是手机openssh的密码,不是电脑密码也不是手机解锁密码]<br>4、然后来输入吧，通过cd可以进入到制定的文件夹目录<br>iPhone6:~ root# cd /usr/bin<br><img src="/images/iOS逆向实践/iOS_reverse_connect_remote.png" alt=""></p>
+<h2 id="APP砸壳"><a href="#APP砸壳" class="headerlink" title="APP砸壳"></a>APP砸壳</h2><p>工具：Clutch、Terminal.app、iFunBox<br>Clutch源码：(<a href="https://github.com/KJCracks/Clutch/releases" target="_blank" rel="external">https://github.com/KJCracks/Clutch/releases</a>)</p>
+<p>1、将Clutch拷贝到手机设备中：/usr/bin/<br>方式1：iFunBox直接拷贝<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_method_1.png" alt=""><br>方式2：scp /path/to/Clutch root@<your.device.ip>:/usr/bin/<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_method_2.png" alt=""></your.device.ip></p>
+<p>2、解决运行Clutch时报Permission denied的错误<br>运行Clutch时报错如下：<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_install_1.png" alt=""><br>解决方法如下：<br>从上图可以看出错误的类型，Permission denied就指权限受限，只要赋予其权限即可。<br>1、打开Terminal.app<br>2、终端里输入chmod a+x Clutch，如下图所示：<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_install_2.png" alt=""></p>
+<p>3、Clutch使用方法<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_opration.png" alt=""></p>
+<p>4、查看iOS设备中所有所安装的APP<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_watch_app.png" alt=""></p>
+<p>5、通过Clutch命令砸壳，如图所示：<br><img src="/images/iOS逆向实践/iOS_reverse_clutch_app.png" alt=""><br><img src="/images/iOS逆向实践/iOS_reverse_clutch_app_2.png" alt=""></p>
+<p>参考：<br><a href="http://iphonedevwiki.net/index.php/Reverse_Engineering_Tools" target="_blank" rel="external">http://iphonedevwiki.net/index.php/Reverse_Engineering_Tools</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/29/Android反编译初探/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -865,7 +1009,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">14</span>
+              <span class="site-state-item-count">15</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -873,7 +1017,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -882,7 +1026,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
