@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="UITextField," />
+  <meta name="keywords" content="KVO," />
 
 
 
@@ -84,25 +84,20 @@
 
 
 
-<meta name="description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
+<meta name="description" content="相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS7中UITextField切换中文时某些协议方法无响应">
-<meta property="og:url" content="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/index.html">
+<meta property="og:title" content="UIView中使用KVO的正确使用姿势">
+<meta property="og:url" content="http://yoursite.com/2017/05/18/UIView中使用KVO的正确方式/index.html">
 <meta property="og:site_name" content="三味猪屋">
-<meta property="og:description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
-<meta property="og:updated_time" content="2017-04-04T13:06:37.000Z">
+<meta property="og:description" content="相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observe">
+<meta property="og:image" content="http://yoursite.com/images/UIView中使用KVO的正确方式/KVO_remove.jpg">
+<meta property="og:image" content="http://yoursite.com/images/UIView中使用KVO的正确方式/UIViewHierarchy.jpg">
+<meta property="og:image" content="http://yoursite.com/images/UIView中使用KVO的正确方式/KVO.jpg">
+<meta property="og:updated_time" content="2017-05-19T01:58:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS7中UITextField切换中文时某些协议方法无响应">
-<meta name="twitter:description" content="UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：
-1- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;
-解决方法：
-1、">
+<meta name="twitter:title" content="UIView中使用KVO的正确使用姿势">
+<meta name="twitter:description" content="相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observe">
+<meta name="twitter:image" content="http://yoursite.com/images/UIView中使用KVO的正确方式/KVO_remove.jpg">
 
 
 
@@ -130,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/18/UIView中使用KVO的正确方式/"/>
 
 
 
 
 
-  <title> iOS7中UITextField切换中文时某些协议方法无响应 | 三味猪屋 </title>
+  <title> UIView中使用KVO的正确使用姿势 | 三味猪屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +262,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/30/iOS7中UITextField切换中文时某些协议方法无响应/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/18/UIView中使用KVO的正确方式/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="花生-sniper">
@@ -291,7 +286,7 @@
             
             
               
-                iOS7中UITextField切换中文时某些协议方法无响应
+                UIView中使用KVO的正确使用姿势
               
             
           </h1>
@@ -304,8 +299,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T10:13:52+08:00">
-                2016-11-30
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-18T19:05:31+08:00">
+                2017-05-18
               </time>
             
 
@@ -358,14 +353,7 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>UITextField切换中文输入，选中键盘中被mark的中文字符时，iOS7中UITextField不会调用如下协议方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string;</div></pre></td></tr></table></figure>
-<p>解决方法：</p>
-<p>1、利用通知中心监听UITextFieldTextDidChangeNotification。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">[[NSNotificationCenter defaultCenter]addObserver:self</div><div class="line">                                        selector:@selector(textFiledEditChanged:)</div><div class="line">                                            name:UITextFieldTextDidChangeNotification</div><div class="line">                                          object:self];</div><div class="line"></div><div class="line">- (void)textFiledEditChanged:(NSNotification *)notification</div><div class="line">&#123;</div><div class="line">    if ([notification.object isKindOfClass:[EzvizTokenTextField class]]) &#123;</div><div class="line">        EzvizTokenTextField *textField = notification.object;</div><div class="line">        UITextRange *selectedRange = [textField markedTextRange];</div><div class="line">        //获取高亮部分</div><div class="line">        UITextPosition *position = [textField positionFromPosition:selectedRange.start offset:0];</div><div class="line">        if (!position) &#123;</div><div class="line">            self.ezvizTokenTextFieldTextLength = [textField.text length];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当键盘中有mark的中文字符时，则根据UITextField实例方法markedTextRange可以获取开始位置以及长度，此时，只要没有选中被mark的字符时，textFiled.text 的 length是不会改变的。只有当选中被mark的字符时，markedTextRange返回的开始位置以及长度为0，则UITextPosition则为nil，此时说明textField.text 的 length改变。</p>
-<p>2、通过KVO监听textField.text 的length。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">[self addObserver:self</div><div class="line">       forKeyPath:@&quot;ezvizTokenTextFieldTextLength&quot;</div><div class="line">          options:NSKeyValueObservingOptionNew</div><div class="line">          context:NULL];</div><div class="line"></div><div class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context</div><div class="line">&#123;</div><div class="line">    if (object == self &amp;&amp; [keyPath isEqualToString:@&quot;ezvizTokenTextFieldTextLength&quot;]) &#123;</div><div class="line">        //DDLogInfo(@&quot;ezvizTokenTextFieldTextLength: %d&quot;, self.ezvizTokenTextFieldTextLength);</div><div class="line">        if (self.ezvizTokenTextFieldTextLength) &#123;</div><div class="line">            if (delegate &amp;&amp; [delegate respondsToSelector:@selector(textFieldDidEndChanged:)]) &#123;</div><div class="line">                [delegate textFieldDidEndChanged:self];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    else &#123;</div><div class="line">        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>从而可以达到在iOS7下监听UITextField输入框内字符变化。</p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。<br><img src="/images/UIView中使用KVO的正确方式/KVO_remove.jpg" alt=""><br>按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observer（观察者）时内存就会出现异常。所以由此可以推断 Observer（观察者）在调用addObserver:forKeyPath:options:context:注册时不是被强引用的。<br>按照官方文档中描述，Observer（观察者）通常情况下是在init或者viewDidLoad时注册，在dealloc时移除。<br>所以在UIView我们会经常在init进行注册，在dealloc时进行注册。这本身没有问题，因为苹果官方文档也这么说的，但是总是感觉有点不好，能不能像UIViewController那样，通过生命周期的相关接口进行注册和取消呢？<br>负责UIView的生命周期的接口有：<br><img src="/images/UIView中使用KVO的正确方式/UIViewHierarchy.jpg" alt=""><br>UIView生命周期如下：<br>未添加subView：<br>push: willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews<br>pop: -&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc<br>添加subView：<br>push: willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews-&gt;didAddSubview-&gt;layoutSubviews<br>pop: -&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc-&gt;willRemoveSubview<br>如果在UIView中实现subView的KVO，那么可以在didAddSubview中注册，在willRemoveSubview中取消。<br>如果在UIView中实现自己的KVO，找到眼瞎也没有找到removeFromSuperview等字眼，真是失望透顶，但是大家有没有发现，在UIView生命周期中MoveToSuperview、MoveToWindow在push和pop都调用了，其中的奥秘就在参数：superview，当push时，是将UIView添加到superview，所以参数superview是不为nil的。当pop时，是将UIView从superview中移除，所以参数superview是nil。<br>正确的姿势：<br><img src="/images/UIView中使用KVO的正确方式/KVO.jpg" alt=""></p>
 
       
     </div>
@@ -389,7 +377,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/UITextField/" rel="tag"># UITextField</a>
+            <a href="/tags/KVO/" rel="tag"># KVO</a>
           
         </div>
       
@@ -398,8 +386,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/30/搭建GitHub个人博客/" rel="next" title="GitHub博客搭建">
-                <i class="fa fa-chevron-left"></i> GitHub博客搭建
+              <a href="/2017/05/11/iOS持续集成之Jenkins/" rel="next" title="iOS持续集成之Jenkins">
+                <i class="fa fa-chevron-left"></i> iOS持续集成之Jenkins
               </a>
             
           </div>
@@ -407,10 +395,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/30/objc_msgSend 的正确使用姿势/" rel="prev" title="objc_msgSend 的正确使用姿势">
-                objc_msgSend 的正确使用姿势 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
