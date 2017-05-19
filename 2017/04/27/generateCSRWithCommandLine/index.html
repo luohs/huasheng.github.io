@@ -90,12 +90,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/04/27/generateCSRWithCommandLine/index.html">
 <meta property="og:site_name" content="三味猪屋">
 <meta property="og:description" content="通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。那么本章只介绍生成私钥，然后通过私钥生成CSR文件。1、生成私钥：1$ ope">
-<meta property="og:image" content="http://yoursite.com/images/CLI/generate_signing_flow.png">
-<meta property="og:updated_time" content="2017-04-27T09:56:55.000Z">
+<meta property="og:image" content="http://yoursite.com/images/CSR/generate_signing_flow.png">
+<meta property="og:updated_time" content="2017-05-19T02:50:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用命令行生成CertificateSigningRequest.certSigningRequest文件">
 <meta name="twitter:description" content="通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。那么本章只介绍生成私钥，然后通过私钥生成CSR文件。1、生成私钥：1$ ope">
-<meta name="twitter:image" content="http://yoursite.com/images/CLI/generate_signing_flow.png">
+<meta name="twitter:image" content="http://yoursite.com/images/CSR/generate_signing_flow.png">
 
 
 
@@ -351,7 +351,7 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？<br><img src="/images/CLI/generate_signing_flow.png" alt=""><br>根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。<br>那么本章只介绍生成私钥，然后通过私钥生成CSR文件。<br>1、生成私钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -out privateSigningKey.key 2048</div></pre></td></tr></table></figure></p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？<br><img src="/images/CSR/generate_signing_flow.png" alt=""><br>根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。<br>那么本章只介绍生成私钥，然后通过私钥生成CSR文件。<br>1、生成私钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -out privateSigningKey.key 2048</div></pre></td></tr></table></figure></p>
 <p>2、生成CSR：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ openssl req -new \</div><div class="line">        -key privateSigningKey.key \</div><div class="line">        -out CertificateSigningRequest.certificateSigningRequest \</div><div class="line">        -subj &quot;/emailAddress=[Your email address]/commonName=[Your Name]/countryName=[Your country code]&quot;</div></pre></td></tr></table></figure></p>
 <p>参考：<br><a href="https://pewpewthespells.com/blog/migrating_code_signing.html" target="_blank" rel="external">https://pewpewthespells.com/blog/migrating_code_signing.html</a></p>
 
