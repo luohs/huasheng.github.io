@@ -84,18 +84,23 @@
 
 
 
-<meta name="description" content="其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：第一：父类init/dealloc使用setter。第二：子类重写了父类的setter。如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类">
+<meta name="description" content="安装Git：与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：1、通过pkg或者dmg安装。http://sourceforge.net/projects/git-osx-installer/2、通过MacPorts安装。$ sudo port install git-core +svn +doc +bash_completion +gitweb3、通过homebrew安装。bre">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Why shouldn't use accessors in init/dealloc?">
-<meta property="og:url" content="http://yoursite.com/2017/05/22/20170522/index.html">
+<meta property="og:title" content="Mac配置Git">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/20170527/index.html">
 <meta property="og:site_name" content="三味猪屋">
-<meta property="og:description" content="其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：第一：父类init/dealloc使用setter。第二：子类重写了父类的setter。如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类">
-<meta property="og:image" content="http://yoursite.com/images/20170522/accessorMethodTips.png">
-<meta property="og:updated_time" content="2017-05-22T01:12:38.000Z">
+<meta property="og:description" content="安装Git：与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：1、通过pkg或者dmg安装。http://sourceforge.net/projects/git-osx-installer/2、通过MacPorts安装。$ sudo port install git-core +svn +doc +bash_completion +gitweb3、通过homebrew安装。bre">
+<meta property="og:image" content="http://yoursite.com/images/20170527/gitconfig.png">
+<meta property="og:image" content="http://yoursite.com/images/20170527/id_rsa.png">
+<meta property="og:image" content="http://yoursite.com/images/20170527/create_rsa.png">
+<meta property="og:image" content="http://yoursite.com/images/20170527/create_rsa_exist.png">
+<meta property="og:image" content="http://yoursite.com/images/20170527/ssh_remote.png">
+<meta property="og:image" content="http://yoursite.com/images/20170527/ssh_remote.png">
+<meta property="og:updated_time" content="2017-05-27T05:26:19.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Why shouldn't use accessors in init/dealloc?">
-<meta name="twitter:description" content="其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：第一：父类init/dealloc使用setter。第二：子类重写了父类的setter。如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类">
-<meta name="twitter:image" content="http://yoursite.com/images/20170522/accessorMethodTips.png">
+<meta name="twitter:title" content="Mac配置Git">
+<meta name="twitter:description" content="安装Git：与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：1、通过pkg或者dmg安装。http://sourceforge.net/projects/git-osx-installer/2、通过MacPorts安装。$ sudo port install git-core +svn +doc +bash_completion +gitweb3、通过homebrew安装。bre">
+<meta name="twitter:image" content="http://yoursite.com/images/20170527/gitconfig.png">
 
 
 
@@ -123,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/05/22/20170522/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/20170527/"/>
 
 
 
 
 
-  <title> Why shouldn't use accessors in init/dealloc? | 三味猪屋 </title>
+  <title> Mac配置Git | 三味猪屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -260,7 +265,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/22/20170522/">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/20170527/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="花生-sniper">
@@ -284,7 +289,7 @@
             
             
               
-                Why shouldn't use accessors in init/dealloc?
+                Mac配置Git
               
             
           </h1>
@@ -297,8 +302,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-22T08:35:45+08:00">
-                2017-05-22
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-27T10:30:51+08:00">
+                2017-05-27
               </time>
             
 
@@ -351,8 +356,14 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/20170522/accessorMethodTips.png" alt=""><br>其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：<br>第一：父类init/dealloc使用setter。<br>第二：子类重写了父类的setter。<br>如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类init方法调用了某个属性的setter方法，由于面向对象的多态特性就会调用子类重写了父类的那个setter方法，但是此时子类还未初始化，所有就会出现问题。<br>同理，当父类进行dealloc时，此时会优先调用子类的dealloc方法，如果父类在dealloc时调用了setter并且该setter被子类重写，同样由于面向对象的多态性就会调用到子类的setter。而此时子类的dealloc已经被调用了，那么再执行子类的代码就会出现问题。</p>
-<p>参考：<br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5</a></p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>安装Git：<br>与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：<br>1、通过pkg或者dmg安装。<br><a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a><br>2、通过MacPorts安装。<br><code>$ sudo port install git-core +svn +doc +bash_completion +gitweb</code><br>3、通过homebrew安装。<br><code>brew install git</code></p>
+<p>设置Git账户及邮箱：<br>1、设置全局账户及邮箱<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name luohs</div><div class="line">$ git config --global user.email luohs@example.com</div></pre></td></tr></table></figure></p>
+<p>修改配置后，可以查看本地git配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.gitconfig</div><div class="line">[user]</div><div class="line">    name = luohs</div><div class="line">    email = luohs@example.com</div></pre></td></tr></table></figure></p>
+<p><img src="/images/20170527/gitconfig.png" alt=""><br>2、取消全局配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global --unset user.name</div><div class="line">$ git config --global --unset user.email</div></pre></td></tr></table></figure></p>
+<p>创建本地SSH：<br>查看本地是否已经创建rsa,如果存在id_rsa和id_rsa.pub说明已经创建<br><code>$ ls ~/.ssh</code><br><img src="/images/20170527/id_rsa.png" alt=""><br>终端输入<code>ssh-keygen -t rsa -C &quot;luohs@example.com&quot;</code><br>“~/.ssh”不存在id_rsa和id_rsa.pub时：<br><img src="/images/20170527/create_rsa.png" alt=""><br>“~/.ssh”已存在id_rsa和id_rsa.pub时：<br><img src="/images/20170527/create_rsa_exist.png" alt=""><br>路径选择 : 使用该命令之后, 会出现提示选择ssh-key生成路径, 这里直接点回车默认即可, 生成的ssh-key在默认路径中(~/.ssh)。<br>密码确认 : 这里我们不使用密码进行登录, 用密码太麻烦;就一路回车下去。</p>
+<p>SSH配置到GitHub：<br>登录到GitHub，进入setting，选中SSH：<br><img src="/images/20170527/ssh_remote.png" alt=""></p>
+<p>验证：<br><code>ssh -T git@github.com</code><br><img src="/images/20170527/ssh_remote.png" alt=""></p>
+<p>参考：<br><a href="http://gitref.org/zh/index.html" target="_blank" rel="external">http://gitref.org/zh/index.html</a><br><a href="https://git-scm.com/book/zh/v1/起步" target="_blank" rel="external">https://git-scm.com/book/zh/v1/起步</a></p>
 
       
     </div>
@@ -385,8 +396,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/05/19/20170519/" rel="next" title="如何设置导航栏返回按钮的事件">
-                <i class="fa fa-chevron-left"></i> 如何设置导航栏返回按钮的事件
+              <a href="/2017/05/22/20170522/" rel="next" title="Why shouldn't use accessors in init/dealloc?">
+                <i class="fa fa-chevron-left"></i> Why shouldn't use accessors in init/dealloc?
               </a>
             
           </div>
@@ -394,10 +405,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/27/20170527/" rel="prev" title="Mac配置Git">
-                Mac配置Git <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
