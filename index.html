@@ -358,7 +358,7 @@
 <p><img src="/images/20170527/gitconfig.png" alt=""><br>2、取消全局配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global --unset user.name</div><div class="line">$ git config --global --unset user.email</div></pre></td></tr></table></figure></p>
 <p>创建本地SSH：<br>查看本地是否已经创建rsa,如果存在id_rsa和id_rsa.pub说明已经创建<br><code>$ ls ~/.ssh</code><br><img src="/images/20170527/id_rsa.png" alt=""><br>终端输入<code>ssh-keygen -t rsa -C &quot;luohs@example.com&quot;</code><br>“~/.ssh”不存在id_rsa和id_rsa.pub时：<br><img src="/images/20170527/create_rsa.png" alt=""><br>“~/.ssh”已存在id_rsa和id_rsa.pub时：<br><img src="/images/20170527/create_rsa_exist.png" alt=""><br>路径选择 : 使用该命令之后, 会出现提示选择ssh-key生成路径, 这里直接点回车默认即可, 生成的ssh-key在默认路径中(~/.ssh)。<br>密码确认 : 这里我们不使用密码进行登录, 用密码太麻烦;就一路回车下去。</p>
 <p>SSH配置到GitHub：<br>登录到GitHub，进入setting，选中SSH：<br><img src="/images/20170527/ssh_remote.png" alt=""></p>
-<p>验证：<br><code>ssh -T git@github.com</code><br><img src="/images/20170527/ssh_remote.png" alt=""></p>
+<p>验证：<br><code>ssh -T git@github.com</code><br><img src="/images/20170527/ssh_verify.png" alt=""></p>
 <p>参考：<br><a href="http://gitref.org/zh/index.html" target="_blank" rel="external">http://gitref.org/zh/index.html</a><br><a href="https://git-scm.com/book/zh/v1/起步" target="_blank" rel="external">https://git-scm.com/book/zh/v1/起步</a></p>
 
           
