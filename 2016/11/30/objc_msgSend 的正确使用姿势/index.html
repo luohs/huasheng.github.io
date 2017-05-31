@@ -361,7 +361,7 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>首先需要import objc_msgSend 所在的头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;objc/message.h&gt;</div></pre></td></tr></table></figure></p>
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>首先需要import objc_msgSend 所在的头文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">#import &lt;objc/message.h&gt;</div></pre></td></tr></table></figure></p>
 <p>‘objc_msgSend’ 同时在 <objc message.h="">和<objc runtime.h="">都有定义，需要进一步了解其异同。</objc></objc></p>
 <p>在64位机器上运行‘objc_msgSend’，如果姿势不对，编译器不会提示警告，而是直接crash。</p>
 <p>解决办法：</p>
