@@ -256,6 +256,172 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/21/iOS的自动化打包/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/04/21/iOS的自动化打包/" itemprop="url">
+                  iOS的自动化打包
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-21T15:12:30+08:00">
+                2017-04-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CI/" itemprop="url" rel="index">
+                    <span itemprop="name">CI</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>虽说网上关于iOS的持续集成的文章数不胜数，还是那句话：不经风雨是见不到彩虹的，不亲身经历，你根本体会不到踩坑的滋味是多么酸爽。酸爽的滋味其实并不是从iOS的自动化打包开始，从构建我们产品2.0版本就已经有尝不尽的酸爽味道，如：使用cocoapods打造智能化的iOS组件化方案，使用AFNetworking打造面向对象的网络组件并将AFNetworking升级到2.0、3.0，使用Realm替换SQLite的本地持久化方案，关于AOP面向切片编程实现的无埋点日志处理方案，使用Mantle打造智能化解析时与Realm如何结合，等等。以后会慢慢再总结吧。</p>
+<p>我一直主张好钢应该用在刀刃上，如果将一个iOS研发人员一天当中有一个小时，哪怕半个小时去做打包的事情，我觉得都是极大的浪费。由于我们项目的特性或者吐槽点说是由于不规范，打一个安装包要牵扯到的资源有：项目部提供打包时APP名称调研表格、项目助理提供打包时配置信息表格(微信key、支付宝、微博、百度、友盟、不同tag的版本号、主题色)、产品UI组提供打包的图片资源、服务端提供打包时接口配置表格(接口地址、HOSID等)、服务端提供打包时开发者信息表格(公钥、私钥、签名信息等)，而且由于每个部门使用不同的svn库，如果打包，单单准备这些资料恐怕就得一两个小时(无力吐槽点不是要找的配置信息多，而是有时候这些信息根本不全)，这些太浪费时间了。</p>
+<p>现在加上苹果对四大领域审核的全面收紧，导致我们之前在一个苹果账号下挂载多个APP的路走不通了，现在几乎是一个APP就需要一个苹果账号，这样的无技术含量且重复性的劳动量占据了开发人员很多的时间成本。</p>
+<p>好了，这里我们只说面包，不谈爱情，也就是不谈理论，只谈实践。我们的自动化打包方案：Jenkins+python+shell+fastlane。</p>
+<p>本章就只说说shell+fastlane</p>
+<p>fastlane是一组工具套件，旨在实现iOS应用发布流程的自动化。<br><img src="/images/iOS自动化/fastlane_toolchain.png" alt=""></p>
+<p>环境搭建：<br>按照之前的文章，在Mac XOS上<br>1、安装brew<br>2、安装ruby<br>3、通过gem安装fastlane<br><img src="/images/iOS自动化/fastlane_version.png" alt=""><br><img src="/images/iOS自动化/fastlane_install_path.png" alt=""></p>
+<p>自动化打包的流程和思路：<br>1、利用python根据配置的版本号找到对应的代码tag。并将该路径传入shell build script。<br>2、根据入参scheme找到xcodeproj的路径和Info.plist的路径。<br>3、重置Info.plist，如：bundleid、version、displayName、微信key等。<br>4、替换资源文件，对某些资源文件进行加密处理。<br>5、cocoapods生成xcworkspace。<br>6、安装证书，并获取到证书codesign-identity。<br>7、添加用户名密码到keychain。<br>8、下载mobileprovision配置文件。<br>9、根据mobileprovision配置文件生成Entitlements，从而读取UUID和teamID。<br>10、重置exportPlist中teamID和exprotMethod项为打包做准备。<br>11、编译并打包。</p>
+<p>亟待解决的问题：<br>1、钥匙串访问权限<br>2、多个证书的选择<br>3、账户密码添加到keychain<br>4、证书安装<br>5、证书codesign-identity的读取<br>6、mobileprovision文件下载问题<br>7、teamID获取问题<br>8、配置文件UUID获取问题<br>9、exprotPlist配置项问题<br>10、cocoapods中podfile文件动态修改问题</p>
+<p>1、security命令<br><img src="/images/iOS自动化/security_help.png" alt=""><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## unlock keychain db</div><div class="line">$ security unlock-keychain -p &quot;820710&quot; $HOME/Library/Keychains/login.keychain</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 生成自定义钥匙串</div><div class="line">$ security create-keychain -p &quot;&quot; $KEYCHAIN</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 删除自定义钥匙串</div><div class="line">$ security delete-keychain $KEYCHAIN</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 导入证书到钥匙串</div><div class="line">$ security import $CERTPATH -k $KEYCHAIN -P &quot;xxxx&quot; -T /usr/bin/codesign</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## 钥匙串中查找证书名称</div><div class="line">CERTNAME=`security find-certificate -p $KEYCHAIN|openssl x509 -noout -subject -nameopt oneline,-esc_msb|awk -F&quot;CN \= &quot; &apos;&#123;print $2&apos;&#125;|awk -F&quot;, OU \=&quot; &apos;&#123;print $1&#125;&apos;|sed s@\&quot;@@g`</div><div class="line">printf &quot;%s\n&quot; &quot;CERTNAME:$CERTNAME&quot;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## 转义字符串</div><div class="line">## 转义单引号需注意:&apos;\&apos;&apos;代表单引号，其他直接书写,如:&amp;%[]&#123;&#125;()等。</div><div class="line"># echo &quot;iPhone Distribution: YUYAO PEOPLE&apos;S HOSPITAL OF ZHEJIANG PROVINCE (xxxxx)&quot;|sed -e &apos;s#[]&#123;&#125;()&amp;% &apos;\&apos;&apos;[]#\\&amp;#g&apos;</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/security.1.html" target="_blank" rel="external">https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/security.1.html</a></p>
+<p>2、PlistBuddy命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">## 根据mobileprovision文件生成Entitlements.plist</div><div class="line">## 这个命令以后在签名也会提到</div><div class="line">$ /usr/libexec/PlistBuddy -x -c  &quot;Print Entitlements&quot; /dev/stdin &lt;&lt;&lt; $(security cms -D -i xxx.mobileprovision) &gt;Entitlements.plist</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 读取plist项</div><div class="line">$ /usr/libexec/PlistBuddy -c &quot;print CFBundleShortVersionString&quot; $&#123;infoPlistPath&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 设置plist已有的项</div><div class="line">$ /usr/libexec/PlistBuddy -c &quot;Set :CFBundleIdentifier $str&quot; $&#123;infoPlistPath&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 添加新的项</div><div class="line">$ /usr/libexec/PlistBuddy -c &quot;Add :CFBundleURLTypes array&quot; $infoPlistPath</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">## 删除字段项</div><div class="line">$ /usr/libexec/PlistBuddy -c &quot;Delete :CFBundleURLTypes&quot; $infoPlistPath</div></pre></td></tr></table></figure>
+<p>参考：<br><a href="https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html" target="_blank" rel="external">https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man8/PlistBuddy.8.html</a></p>
+<p>fastlane-credentias用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"></div><div class="line">#--------------------------------------------</div><div class="line"># 功能：操作keychain</div><div class="line"># 使用说明：	在keychain中保存或删除账户密码</div><div class="line"># 作者：luohs</div><div class="line"># E-mail:luohuasheng0225@gmail.com</div><div class="line">#--------------------------------------------</div><div class="line"></div><div class="line">## $1:username, $2:password</div><div class="line">function func_fastlaneCredentiasAddToKeychain() &#123;</div><div class="line">  printf &quot;%s\n&quot; &quot;fastlane credentias add&quot;</div><div class="line">  local username=$1</div><div class="line">  local password=$2</div><div class="line"></div><div class="line">  printf &quot;%s\n&quot; &quot;username: $username&quot;</div><div class="line">  printf &quot;%s\n&quot; &quot;password: $password&quot;</div><div class="line"></div><div class="line">  if [ -z &quot;$username&quot; ]</div><div class="line">  then</div><div class="line">    printf &quot;%s\n&quot; &quot;~~~~~~~username未知！~~~~~~~~~~~&quot;</div><div class="line">    exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  if [ -z &quot;$password&quot; ]</div><div class="line">  then</div><div class="line">    printf &quot;%s\n&quot; &quot;~~~~~~~password未知！~~~~~~~~~~~&quot;</div><div class="line">    exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  fastlane fastlane-credentials \</div><div class="line">  add \</div><div class="line">  --username &quot;$username&quot; \</div><div class="line">  --password  &quot;$password&quot;</div><div class="line">&#125;</div><div class="line"></div><div class="line">## $1:username</div><div class="line">function func_fastlaneCredentiasRemoveFromKeychain() &#123;</div><div class="line">  printf &quot;%s\n&quot; &quot;fastlane credentias remove&quot;</div><div class="line">  local username=$1</div><div class="line"></div><div class="line">  printf &quot;%s\n&quot; &quot;username: $username&quot;</div><div class="line"></div><div class="line">  if [ -z &quot;$username&quot; ]</div><div class="line">  then</div><div class="line">    printf &quot;%s\n&quot; &quot;~~~~~~~username未知！~~~~~~~~~~~&quot;</div><div class="line">    exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  fastlane fastlane-credentials \</div><div class="line">  remove \</div><div class="line">  --username &quot;$username&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>fastlane-sigh用法：<br>查看官方使用帮助：<br><img src="/images/iOS自动化/sigh_help.png" alt=""><br>根据官方使用帮助编写代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"></div><div class="line">#--------------------------------------------</div><div class="line"># 功能：download mobileprovision file</div><div class="line"># 使用说明：	download &lt;input appleID&gt; &lt;input appID&gt; &lt;input mobileprovision file name&gt; &lt;input mobileprovision file path&gt;</div><div class="line"># 作者：luohs</div><div class="line"># E-mail:luohuasheng0225@gmail.com</div><div class="line">#--------------------------------------------</div><div class="line"></div><div class="line">function func_fastlaneSighDownloadProvisionProfile() &#123;</div><div class="line">	local appleID=&quot;$1&quot;</div><div class="line">	local appID=&quot;$2&quot;</div><div class="line">	local provisionProfileName=&quot;$3&quot;</div><div class="line">	local provisionProfileOutput=&quot;$4&quot;</div><div class="line">	local sighMethod=&quot;$5&quot;</div><div class="line"></div><div class="line">	if [ -z &quot;$3&quot; ]</div><div class="line">	then</div><div class="line">		provisionProfileName=&quot;fastlane-sigh&quot;.mobileprovision</div><div class="line">	else</div><div class="line">		provisionProfileName=&quot;$3&quot;.mobileprovision</div><div class="line">	fi</div><div class="line"></div><div class="line">	printf &quot;%s\n&quot; &quot;sighMethod: $sighMethod&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;appleID: $appleID&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;appID: $appID&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;provisionProfileName: $provisionProfileName&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;provisionProfileOutput: $provisionProfileOutput&quot;</div><div class="line"></div><div class="line">	fastlane sigh \</div><div class="line">	$&#123;sighMethod&#125; \</div><div class="line">	--force false \</div><div class="line">	--skip_install false \</div><div class="line">	--skip_certificate_verification \</div><div class="line">	--username &quot;$&#123;appleID&#125;&quot; \</div><div class="line">	--app_identifier &quot;$&#123;appID&#125;&quot; \</div><div class="line">	--filename &quot;$&#123;provisionProfileName&#125;&quot; \</div><div class="line">	--output_path &quot;$&#123;provisionProfileOutput&#125;&quot;</div><div class="line"></div><div class="line">	if [ -f $&#123;provisionProfileOutput&#125;/$&#123;provisionProfileName&#125; ]</div><div class="line">	then</div><div class="line">		printf &quot;%s\n&quot; &quot;provisionProfile已下载&quot;</div><div class="line">		printf &quot;%s\n&quot; &quot;路径：$provisionProfileOutput&quot;</div><div class="line">		printf &quot;%s\n&quot; &quot;名称：$provisionProfileName&quot;</div><div class="line">		provisionProfilePath=&quot;$&#123;provisionProfileOutput&#125;/$&#123;provisionProfileName&#125;&quot;</div><div class="line">	else</div><div class="line">		printf &quot;%s\n&quot; &quot;provisionProfile下载失败！&quot;</div><div class="line">	fi</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>踩坑：<br>1、${sighMethod} 此参数为””时，创建或下载production配置文件，如果需要develop配置文件时，则需要配置成”development”。<br>2、–force true时，无论开发者账号上是否存在可用的配置文件都会重新生成一个。<br>3、–skip_install true时只下载配置文件，不安装。一定要安装才能打包，也就是必须要设置为false。</p>
+<p>fastlane-gym用法：<br>查看官方使用帮助：<br><img src="/images/iOS自动化/gym_help_1.png" alt=""><br><img src="/images/iOS自动化/gym_help_2.png" alt=""><br>根据官方使用帮助编写代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"></div><div class="line">#--------------------------------------------</div><div class="line"># 功能：fastlane gym</div><div class="line"># 使用说明：	gym</div><div class="line"># 作者：luohs</div><div class="line"># E-mail:luohuasheng0225@gmail.com</div><div class="line">#--------------------------------------------</div><div class="line"></div><div class="line">## $1:xcodeprojName, $2:codesign, $3:teamid, $4:provisionProfileSpecifier, $5:buildConfigration, $6:exportMethod, $7:exportOptionsPlistPath, $8:archiveOutput,</div><div class="line">function func_fastlaneGymBuild() &#123;</div><div class="line">	printf &quot;%s\n&quot; &quot;fastlane gym&quot;</div><div class="line">	#生成安装包名称</div><div class="line">	local xcodeprojName=$1</div><div class="line">	local codesign=$2</div><div class="line">	local teamid=$3</div><div class="line">	local provisionProfileSpecifier=$4</div><div class="line">	local buildConfigration=$5</div><div class="line">	local exportMethod=$6</div><div class="line">	local exportOptionsPlistPath=$7</div><div class="line">	local archiveOutput=$8</div><div class="line"></div><div class="line">	local archiveName=$(func_commonGetAppName)_V$(func_commonGetAppVersion)_`date +%Y%m%d%H%M%S`</div><div class="line">	local archivePath=&quot;$(func_commonGetTempPath)/$&#123;archiveName&#125;.xcarchive&quot;</div><div class="line">	#local archivePath=&quot;$archiveOutput/$&#123;archiveName&#125;.xcarchive&quot;</div><div class="line"></div><div class="line">	# xcrun xcodebuild -list -workspace $&#123;project_name&#125;.xcworkspace</div><div class="line">	# 解决Couldn&apos;t find specified scheme &apos;xxxx&apos;.报错，需要打开工程去 mark scheme &apos;xxxx&apos; Shared</div><div class="line">	#open $&#123;xcodeprojName&#125;.xcworkspace</div><div class="line">	sleep 1</div><div class="line"></div><div class="line">	local codesignEscapeString=$(func_commonEscapeString &quot;$codesign&quot;)</div><div class="line"></div><div class="line">	printf &quot;%s\n&quot; &quot;xcodeprojName: $xcodeprojName&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;codesign: $codesign&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;teamid: $teamid&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;provisionProfileSpecifier: $provisionProfileSpecifier&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;buildConfigration: $buildConfigration&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;exportMethod: $exportMethod&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;exportOptionsPlistPath: $exportOptionsPlistPath&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;archiveOutput: $archiveOutput&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;codesignEscapeString: $codesignEscapeString&quot;</div><div class="line"></div><div class="line">	# build</div><div class="line">	fastlane gym \</div><div class="line">	--workspace $&#123;xcodeprojName&#125;.xcworkspace \</div><div class="line">	--scheme $&#123;xcodeprojName&#125; \</div><div class="line">	--clean \</div><div class="line">	--include_symbols true \</div><div class="line">	--configuration $&#123;buildConfigration&#125; \</div><div class="line">	--xcargs &quot;PROVISIONING_PROFILE=&apos;$&#123;provisionProfileSpecifier&#125;&apos; PROVISIONING_PROFILE_SPECIFIER=&apos;$&#123;provisionProfileSpecifier&#125;&apos; DEVELOPMENT_TEAM=&apos;$&#123;teamid&#125;&apos; PRODUCT_BUNDLE_IDENTIFIER=&apos;$(func_commonGetBundleIdentifier)&apos;&quot; \</div><div class="line">	--export_method $&#123;exportMethod&#125; \</div><div class="line">	--archive_path $&#123;archivePath&#125; \</div><div class="line">	--codesigning_identity &quot;$&#123;codesign&#125;&quot; \</div><div class="line">	--export_options $&#123;exportOptionsPlistPath&#125; \</div><div class="line">	--output_directory $&#123;archiveOutput&#125; \</div><div class="line">	--output_name &quot;$&#123;archiveName&#125;&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/images/iOS自动化/sigh_build.png" alt=""><br>踩坑：<br>1、xcode8以后<code>--xcargs</code>项中需要增加<code>PROVISIONING_PROFILE_SPECIFIER=&#39;${provisionProfileSpecifier}&#39;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--xcargs &quot;PROVISIONING_PROFILE=&apos;$&#123;provisionProfileSpecifier&#125;&apos; PROVISIONING_PROFILE_SPECIFIER=&apos;$&#123;provisionProfileSpecifier&#125;&apos; DEVELOPMENT_TEAM=&apos;$&#123;teamid&#125;&apos; CODE_SIGNING_IDENTITY=&apos;$&#123;codesign&#125;&apos; PRODUCT_BUNDLE_IDENTIFIER=&apos;$(func_commonGetBundleIdentifier)&apos;&quot;</div></pre></td></tr></table></figure></p>
+<p>2、当CODE_SIGNING_IDENTITY字符串中有特殊符号时，如：<code>iPhone Distribution: YUYAO PEOPLE&#39;S HOSPITAL OF ZHEJIANG PROVINCE (xxxxx)</code>，无论是否对CODE_SIGNING_IDENTITY进行特殊字符转义都编译不成功。<br>a、使用非转义的CODE_SIGNING_IDENTITY:<code>iPhone Distribution: YUYAO PEOPLE&#39;S HOSPITAL OF ZHEJIANG PROVINCE (xxxxx)</code><br>编译如下：<br><img src="/images/iOS自动化/gym_build_1.png" alt=""><br><img src="/images/iOS自动化/gym_build_2.png" alt=""><br>b、使用转义的CODE_SIGNING_IDENTITY:<code>iPhone\ Distribution:\ YUYAO\ PEOPLE\&#39;S\ HOSPITAL\ OF\ ZHEJIANG\ PROVINCE\ \(xxxxx\)</code><br>编译如下：<br><img src="/images/iOS自动化/gym_build_3.png" alt=""><br><img src="/images/iOS自动化/gym_build_4.png" alt=""><br>c、最终解决，去掉<code>--xcargs</code>中的CODE_SIGNING_IDENTITY项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">--xcargs &quot;PROVISIONING_PROFILE=&apos;$&#123;provisionProfileSpecifier&#125;&apos; PROVISIONING_PROFILE_SPECIFIER=&apos;$&#123;provisionProfileSpecifier&#125;&apos; DEVELOPMENT_TEAM=&apos;$&#123;teamid&#125;&apos; PRODUCT_BUNDLE_IDENTIFIER=&apos;$(func_commonGetBundleIdentifier)&apos;&quot;</div></pre></td></tr></table></figure></p>
+<p>编译如下:<br><img src="/images/iOS自动化/gym_build_5.png" alt=""><br><img src="/images/iOS自动化/gym_build_6.png" alt=""><br>正常编译且签名成功！</p>
+<p>fastlane-deliver用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"></div><div class="line">#--------------------------------------------</div><div class="line"># 功能：上传ipa到iTunesconnect</div><div class="line"># 使用说明：	upload &lt;input appleID&gt; &lt;input teamid&gt; &lt;input ipaPath&gt;</div><div class="line"># 作者：luohs</div><div class="line"># E-mail:luohuasheng0225@gmail.com</div><div class="line">#--------------------------------------------</div><div class="line"></div><div class="line">## upload to iTunesConnect $1:appleID, $2:teamid, $3:ipaPath</div><div class="line">function func_fastlaneDeliverUpload() &#123;</div><div class="line">	printf &quot;%s\n&quot; &quot;fastlane pilot&quot;</div><div class="line">	local appleID=$1</div><div class="line">	local teamid=$2</div><div class="line">	local ipaPath=$3</div><div class="line"></div><div class="line">	printf &quot;%s\n&quot; &quot;appleID: $appleID&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;teamid: $teamid&quot;</div><div class="line">	printf &quot;%s\n&quot; &quot;ipaPath: $ipaPath&quot;</div><div class="line"></div><div class="line">	if [ -z &quot;$appleID&quot; ]</div><div class="line">	then</div><div class="line">		printf &quot;%s\n&quot; &quot;~~~~~~~appleID未知！~~~~~~~~~~~&quot;</div><div class="line">		exit -1</div><div class="line">	fi</div><div class="line"></div><div class="line">	if [ -z &quot;$teamid&quot; ]</div><div class="line">	then</div><div class="line">		printf &quot;%s\n&quot; &quot;~~~~~~~teamid未知！~~~~~~~~~~~&quot;</div><div class="line">		exit -1</div><div class="line">	fi</div><div class="line"></div><div class="line">	if [ -z &quot;$ipaPath&quot; -o ! -f &quot;$ipaPath&quot; ]</div><div class="line">	then</div><div class="line">			printf &quot;%s\n&quot; &quot;~~~~~~~ipaPath未知！~~~~~~~~~~~&quot;</div><div class="line">			exit -1</div><div class="line">	fi</div><div class="line"></div><div class="line">	fastlane deliver \</div><div class="line">	--username &quot;$&#123;appleID&#125;&quot; \</div><div class="line">	-f \</div><div class="line">	--force \</div><div class="line">	--skip_screenshots \</div><div class="line">	--skip_metadata \</div><div class="line">	-b &quot;$&#123;teamid&#125;&quot; \</div><div class="line">	--ipa &quot;$&#123;ipaPath&#125;&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>fastlane-pilot用法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line"></div><div class="line">#--------------------------------------------</div><div class="line"># 功能：upload to testflight</div><div class="line"># 使用说明：	&lt;input appleID&gt; &lt;input bundleIdentifier&gt; &lt;input ipaPath&gt;</div><div class="line"># 作者：luohs</div><div class="line"># E-mail:luohuasheng0225@gmail.com</div><div class="line">#--------------------------------------------</div><div class="line"></div><div class="line">## upload to testflight $1:appleID, $2:bundleIdentifier, $3:ipaPath</div><div class="line">function func_fastlanePilotUpload() &#123;</div><div class="line">  printf &quot;%s\n&quot; &quot;fastlane pilot&quot;</div><div class="line">  local appleID=$1</div><div class="line">	local bundleIdentifier=$2</div><div class="line">	local ipaPath=$3</div><div class="line"></div><div class="line">  printf &quot;%s\n&quot; &quot;appleID: $appleID&quot;</div><div class="line">  printf &quot;%s\n&quot; &quot;bundleIdentifier: $bundleIdentifier&quot;</div><div class="line">  printf &quot;%s\n&quot; &quot;ipaPath: $ipaPath&quot;</div><div class="line"></div><div class="line">  if [ -z &quot;$appleID&quot; ]</div><div class="line">  then</div><div class="line">    printf &quot;%s\n&quot; &quot;~~~~~~~appleID未知！~~~~~~~~~~~&quot;</div><div class="line">    exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  if [ -z &quot;$bundleIdentifier&quot; ]</div><div class="line">  then</div><div class="line">    printf &quot;%s\n&quot; &quot;~~~~~~~bundleIdentifier未知！~~~~~~~~~~~&quot;</div><div class="line">    exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  if [ -z &quot;$ipaPath&quot; -o ! -f &quot;$ipaPath&quot; ]</div><div class="line">  then</div><div class="line">      printf &quot;%s\n&quot; &quot;~~~~~~~ipaPath未知！~~~~~~~~~~~&quot;</div><div class="line">      exit -1</div><div class="line">  fi</div><div class="line"></div><div class="line">  fastlane pilot \</div><div class="line">  upload \</div><div class="line">  --username &quot;$&#123;appleID&#125;&quot; \</div><div class="line">  --app_identifier &quot;$&#123;bundleIdentifier&#125;&quot; \</div><div class="line">  --changelog &quot;Beta版本测试内容主要涵盖预约挂号、医院导航等功能。&quot; \</div><div class="line">  --beta_app_description &quot;构建版本为Beta版本供测试人员进行测试。&quot; \</div><div class="line">  --beta_app_feedback_email &quot;luohs@hsyuntai.com&quot; \</div><div class="line">  --ipa &quot;$&#123;ipaPath&#125;&quot; \</div><div class="line">  --skip_waiting_for_build_processing true</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>最后附上整个CI工程的截图：<br><img src="/images/iOS自动化/CI_1.png" alt=""></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/16/OCR_2/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1526,162 +1692,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/11/30/搭建GitHub个人博客/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="花生-sniper">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="三味猪屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/11/30/搭建GitHub个人博客/" itemprop="url">
-                  GitHub博客搭建
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-30T09:24:11+08:00">
-                2016-11-30
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>工具<br>markdown语法：(<a href="http://www.appinn.com/markdown/#header" target="_blank" rel="external">http://www.appinn.com/markdown/#header</a>)<br>Atom：(<a href="https://atom.io" target="_blank" rel="external">https://atom.io</a>)</p>
-<h2 id="1-创建Github-域名和空间"><a href="#1-创建Github-域名和空间" class="headerlink" title="1. 创建Github 域名和空间"></a>1. 创建Github 域名和空间</h2><p>1.1注册</p>
-<p>注册<a href="https://github.com/join?source=header-home" target="_blank" rel="external">Github</a>账号。</p>
-<p>#注意：博客域名将会为username.github.io，所以username会影响到博客的域名。</p>
-<p>1.2 创建仓库</p>
-<p>创建一个仓库(repository) 来存储博客的网站，点击首页任意位置出现的 New repository按钮创建仓库。</p>
-<p>#注意：Respository name 中的 username 一定与前面的 Owner 一致。</p>
-<h2 id="2-环境搭建"><a href="#2-环境搭建" class="headerlink" title="2. 环境搭建"></a>2. 环境搭建</h2><p>这里介绍使用 <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a> 搭建博客框架。下面需要安装的工具包括 <a href="http://brew.sh" target="_blank" rel="external">brew</a>，<a href="https://git-scm.com" target="_blank" rel="external">Git</a>，<a href="https://www.npmjs.com/package/nvm" target="_blank" rel="external">nvm</a>，<a href="https://nodejs.org/en/" target="_blank" rel="external">Nodejs</a>，<a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>。</p>
-<p>2.1 安装 brew<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<p>2.2 安装 Git<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install git</div></pre></td></tr></table></figure></p>
-<p>2.3 安装 nvm（nvm主要用于安装、管理node）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. Homebrew 安装方式，此安装方式无需重启</div><div class="line">a、安装nvm</div><div class="line">$ brew install nvm</div><div class="line">$ mkdir ~/.nvm</div><div class="line">$ export NVM_DIR=~/.nvm</div><div class="line">b、启动nvm</div><div class="line">$ . $(brew --prefix nvm)/nvm.sh 或者 source $(brew --prefix nvm)/nvm.sh</div></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2. curl安装方式</div><div class="line">$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh</div></pre></td></tr></table></figure>
-<p>2.4 安装 Nodejs<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">查看Nodejs版本</div><div class="line">$ nvm ls-remote</div><div class="line">安装指定版本</div><div class="line">$ nvm install 7.1.0</div><div class="line">安装最新版本</div><div class="line">$ nvm install stable</div></pre></td></tr></table></figure></p>
-<p>2.5 安装 Hexo<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo npm install hexo-cli -g</div></pre></td></tr></table></figure></p>
-<h2 id="3-编写博客"><a href="#3-编写博客" class="headerlink" title="3. 编写博客"></a>3. 编写博客</h2><p>3.1 创建博客<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init username.github.io</div></pre></td></tr></table></figure></p>
-<p>3.2 配置主题</p>
-<p>3.2.1 安装主题<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd username.github.io</div><div class="line">$ git clone https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
-<p><a href="https://hexo.io/themes/" target="_blank" rel="external">查看更多主题</a></p>
-<p>3.2.2 基础配置<br>打开文件_config.yml修改几个键值对，下面把几个必须设置的列出来按需求修改。注意配置的键值之间一定要有空格。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">title: dimsky 的 9 维空间    //你博客的名字</div><div class="line">author: dimsky  //你的名字</div><div class="line">language: zh-Hans    //语言 中文</div><div class="line">theme: next   //刚刚安装的主题名称</div><div class="line">deploy:</div><div class="line">  type: git    //使用Git 发布</div><div class="line">  repo: https://github.com/username/username.github.io.git //刚创建的Github仓库</div></pre></td></tr></table></figure></p>
-<p><a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="external">查看更多设置</a></p>
-<p>3.2.3 如何添加“tags”页面、“categorys”页面、“about”页面等。<br>新增“tags”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page tags</div></pre></td></tr></table></figure></p>
-<p>新增“categorys”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page categories</div></pre></td></tr></table></figure></p>
-<p>新增“about”页面<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd your-hexo-site</div><div class="line">$ hexo new page about</div></pre></td></tr></table></figure></p>
-<p>修改_config.yml菜单配置为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">menu:</div><div class="line">  home: /archives</div><div class="line">  categories: /categories</div><div class="line">  about: /about</div><div class="line">  archives: /archives</div><div class="line">  tags: /tags</div></pre></td></tr></table></figure></p>
-<p>参考：<a href="http://theme-next.iissnan.com/theme-settings.html#tags-page" target="_blank" rel="external">http://theme-next.iissnan.com/theme-settings.html#tags-page</a></p>
-<p>3.2.4 主题配置<br>主题配置文件在username.github.io/themes/next/_config.yml中修改。<br><a href="http://theme-next.iissnan.com/getting-started.html#theme-settings" target="_blank" rel="external">更多配置</a></p>
-<p>3.3 写文章<br>在username.github.io/source/_posts下创建你的博客，命名“搭建GitHub个人博客.md”。既然是搭建GitHub个人博客，那么就用GitHub的编辑器 <a href="https://atom.io" target="_blank" rel="external">Atom</a>吧。<br>markdown语法：(<a href="http://www.appinn.com/markdown/#header" target="_blank" rel="external">http://www.appinn.com/markdown/#header</a>)</p>
-<p>3.4 本地预览<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ cd username.github.io</div><div class="line">$ hexo s</div></pre></td></tr></table></figure></p>
-<p>测试服务启动，浏览器中输入<a href="https://localhost:4000" target="_blank" rel="external">https://localhost:4000</a> 就可以预览了。</p>
-<ol>
-<li>发布博客<br>4.1 安装发布工具<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>4.2 发布<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</div></pre></td></tr></table></figure></p>
-<h2 id="5-更多有趣的插件"><a href="#5-更多有趣的插件" class="headerlink" title="5 更多有趣的插件"></a>5 更多有趣的插件</h2><p><a href="https://hexo.io/plugins/" target="_blank" rel="external">Hexo更多插件</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1722,7 +1737,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">20</span>
+              <span class="site-state-item-count">21</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1730,7 +1745,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1739,7 +1754,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-count">18</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
