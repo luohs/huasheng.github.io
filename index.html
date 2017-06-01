@@ -256,6 +256,143 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/01/20170601/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/01/20170601/" itemprop="url">
+                  iOS包大小瘦身方案（一）- iOS安装包构成
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-01T09:12:50+08:00">
+                2017-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/app-thinning/" itemprop="url" rel="index">
+                    <span itemprop="name">app-thinning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>要想将iOS安装包瘦身，首先得熟悉iOS安装包的构成，然后根据各个部分逐个优化。<br>1、iOS安装包构成：<br>iOS安装包是以后缀名为“ipa”一个压缩包，该压缩包内容大致包含三块内容：可执行文件、资源文件、签名文件<br>构成如下图：<br><img src="/images/20170601/ipa_archive.png" alt=""><br>2、可执行文件构成：<br>可执行文件是通过编译器、连接器将我们编写的代码、静态库、动态库编译成的文件，大致可分为代码段和数据段<br>构成如下：<br><img src="/images/20170601/ipa_mach.png" alt=""><br>3、可执行文件支持的cpu架构以及安装包大小关系<br>以“滴滴打车”为例，对比去年3.9.7版本以及最新4.3.10版本<br>3.9.7版本：<br><img src="/images/20170601/didi_3_9_7.png" alt=""><br><img src="/images/20170601/didi_3_9_7_2.png" alt=""><br><img src="/images/20170601/didi_3_9_7_3.png" alt=""><br>4.3.10版本：<br><img src="/images/20170601/didi_4_3_10_1.png" alt=""><br><img src="/images/20170601/didi_4_3_10_2.png" alt=""><br><img src="/images/20170601/didi_4_3_10_3.png" alt=""><br>由此可见支持的CPU体系架构越多，对安装包大小成正比例影响。<br>4、可执行文件各段所占大小<br>64位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm64_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_3.png" alt=""><br>32位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm7_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_3.png" alt=""><br>5、第三方SDK大小占比<br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm64.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm7.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_2.png" alt=""><br><img src="/images/20170601/ipa_archive_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_size_2.png" alt=""><br>通过比较不难看出第三方SDK编译出来的可执行文件占比达到62.5%<br>6、资源文件对安装包的影响<br>未对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_4.png" alt=""><br>对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_3.png" alt=""><br>下图为对我们app中图片资源进行无损压缩的效果：<br><img src="/images/20170601/imageOptim.png" alt=""></p>
+<p>Tips：<br>1、查看可执行文件大小：<br><img src="/images/20170601/linkmap_setting_1.png" alt=""><br><img src="/images/20170601/linkmap_setting_2.png" alt=""><br><img src="/images/20170601/linkmap_used.png" alt=""><br><a href="https://gist.github.com/bang590/8f3e9704f1c2661836cd" target="_blank" rel="external">linkmap.js</a><br>2、MachOView使用：<br><a href="http://sourceforge.net/projects/machoview/" target="_blank" rel="external">MachOView下载地址</a><br><a href="https://github.com/gdbinit/MachOView" target="_blank" rel="external">MachOView源码地址</a><br>3、ImageOptim使用：<br><a href="https://imageoptim.com/mac" target="_blank" rel="external">ImageOptim下载地址</a><br>4、去除工程中多余的图片资源：<br>a、脚本<br>详见<a href="https://stackoverflow.com/questions/6113243/how-to-find-unused-images-in-an-xcode-project/6113449#6113449" target="_blank" rel="external">链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">PROJ=`find . -name &apos;*.xib&apos; -o -name &apos;*.[mh]&apos;`</div><div class="line">for png in `find . -name &apos;*.png&apos;`</div><div class="line">do</div><div class="line">name=`basename $png`</div><div class="line">if ! grep -qhs &quot;$name&quot; &quot;$PROJ&quot;; then</div><div class="line">    echo &quot;$png is not referenced&quot;</div><div class="line">fi</div><div class="line">done</div></pre></td></tr></table></figure></p>
+<p>b、Unused<br><a href="http://jeffhodnett.github.io/Unused/" target="_blank" rel="external">Unused</a><br>c、LSUnusedResources<br><a href="https://github.com/tinymind/LSUnusedResources/" target="_blank" rel="external">LSUnusedResources</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/31/20170532/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1490,147 +1627,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/26/Xcode_support_low_sdks/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="花生-sniper">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="三味猪屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/04/26/Xcode_support_low_sdks/" itemprop="url">
-                  Xcode高版本支持低版本系统真机调试
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-26T19:30:01+08:00">
-                2017-04-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Xcode/" itemprop="url" rel="index">
-                    <span itemprop="name">Xcode</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>随着Xcode8的发布，Xcode默认最低支持的iOS版本为8.0，所以想调试iOS8以下真机就比较头痛。那么本文就以Xoce8支持iOS7为例子来介绍高版本Xcode如何支持低版本系统真机调试。<br>一、首先得有低版本系统的SDK。获取低版本系统的SDK有三种方式：<br>方式1:在升级Xcode之前，请前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p>拷贝将要被摒弃的SDK。<br>方式2:伸手党方式从好心人那里下载人家已经保存下来的SDK。<br>如：<a href="https://github.com/duoduoxiao/iOS7SDK.git" target="_blank" rel="external">https://github.com/duoduoxiao/iOS7SDK.git</a><br>方式3:安装低版本的Xcode，安装完之后前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p>取出SDK或者直接使用低版本Xcode进行调试。<br>安装低版本Xcode：<br>1、下载dmg安装；<br>2、通过ruby插件安装；<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ gem install xcode-install</div><div class="line">$ xcversion install 7.3.1</div></pre></td></tr></table></figure></p>
-<p><img src="/images/Xcode支持低版本真机调试/xcode-install.png" alt=""><br>二、其次就是将低版本的SDK拷贝到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/DeviceSupport</div></pre></td></tr></table></figure></p>
-<p><img src="/images/Xcode支持低版本真机调试/SDKs_dir.png" alt=""><br>三、修改 SDKSettings.plist<br>前往<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/SDKSettings.plist</div></pre></td></tr></table></figure></p>
-<p>增加将要支持的SDK。<br><img src="/images/Xcode支持低版本真机调试/modify_SDKSetting.png" alt=""><br>小技巧：<code>SDKSettings.plist</code>在文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk</div></pre></td></tr></table></figure></p>
-<p>中是被锁保护了，所以想修改它的话可以将其拷贝到其他文件夹修改完之后再覆盖原文件夹中的<code>SDKSettings.plist</code>。<br>四、重启Xcode</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1676,7 +1672,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">22</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1684,7 +1680,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1693,7 +1689,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
