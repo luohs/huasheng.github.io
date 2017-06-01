@@ -1,0 +1,654 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="weak-strong dance," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入理解"weak-strong dance"">
+<meta property="og:url" content="http://yoursite.com/2017/05/31/20170531/index.html">
+<meta property="og:site_name" content="三味猪屋">
+<meta property="og:description" content="使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃">
+<meta property="og:image" content="http://yoursite.com/images/20170531/block_objc.png">
+<meta property="og:image" content="http://yoursite.com/images/20170531/clang_rewrite.png">
+<meta property="og:image" content="http://yoursite.com/images/20170531/block_clang.png">
+<meta property="og:image" content="http://yoursite.com/images/20170531/block_work_in_ARC.png">
+<meta property="og:updated_time" content="2017-05-31T07:31:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深入理解"weak-strong dance"">
+<meta name="twitter:description" content="使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃">
+<meta name="twitter:image" content="http://yoursite.com/images/20170531/block_objc.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/31/20170531/"/>
+
+
+
+
+
+  <title> 深入理解"weak-strong dance" | 三味猪屋 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">三味猪屋</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/31/20170531/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深入理解"weak-strong dance"
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-31T15:09:22+08:00">
+                2017-05-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/weak-strong-dance/" itemprop="url" rel="index">
+                    <span itemprop="name">weak-strong dance</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：<br>1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。<br>如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃，但 Block 还是会执行，会打印“self is (null)”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line"></div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    self.handler = ^&#123;</div><div class="line">        __strong typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        NSLog(@&quot;self is %@&quot;, strongSelf);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    NSTimeInterval interval = 6.0;</div><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(interval * NSEC_PER_SEC)), dispatch_get_main_queue(), weakSelf.handler);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>理解这个问题需要了解block原理，简单一点的说，block有三种类型：<br>NSConcreteStackBlock（栈）<br>NSConcreteGlobalBlock（全局）<br>NSConcreteMallocBlock（堆）</p>
+<p>如何实现这三种类型的block：<br><img src="/images/20170531/block_objc.png" alt=""><br>使用<code>clang -rewrite-objc $filePath</code>将OC代码转化为C++代码实现。<a href="https://luohs.github.io/2017/05/30/20170530/" target="_blank" rel="external">如何安装编译clang</a><br><img src="/images/20170531/clang_rewrite.png" alt=""><br><img src="/images/20170531/block_clang.png" alt=""><br>如果 block 在记述全局变量的地方被设置或者 block 没有捕获外部变量，那就生成一个 NSConcreteGlobalBlock 实例。其它情况都会生成一个 NSConcreteStackBlock 实例，也就是说，它是在栈上的，所以一旦它所属的变量超出了变量作用域，该 block 就被废弃了。而当发生以下任一情况时：<br>a、手动调用 block 的实例方法copy。<br>b、block 作为函数返回值返回。<br>c、将 block 赋值给附有__strong修饰符的成员变量。<br>d、在方法名中含有usingBlock的 Cocoa 框架方法或 GCD 的 API 中传递 block。<br>所以NSConcreteMallocBlock 类型的 block 通常不会在源码中直接出现。<br><a href="http://www.galloway.me.uk/2013/05/a-look-inside-blocks-episode-3-block-copy/" target="_blank" rel="external">看一下Block_copy()实现</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static void *_Block_copy_internal(const void *arg, const int flags) &#123;</div><div class="line">    struct Block_layout *aBlock;</div><div class="line">    const bool wantsOne = (WANTS_ONE &amp; flags) == WANTS_ONE;</div><div class="line"></div><div class="line">    // 1</div><div class="line">    if (!arg) return NULL;</div><div class="line"></div><div class="line">    // 2</div><div class="line">    aBlock = (struct Block_layout *)arg;</div><div class="line"></div><div class="line">    // 3</div><div class="line">    if (aBlock-&gt;flags &amp; BLOCK_NEEDS_FREE) &#123;</div><div class="line">        // latches on high</div><div class="line">        latching_incr_int(&amp;aBlock-&gt;flags);</div><div class="line">        return aBlock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 4</div><div class="line">    else if (aBlock-&gt;flags &amp; BLOCK_IS_GLOBAL) &#123;</div><div class="line">        return aBlock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 5</div><div class="line">    struct Block_layout *result = malloc(aBlock-&gt;descriptor-&gt;size);</div><div class="line">    if (!result) return (void *)0;</div><div class="line"></div><div class="line">    // 6</div><div class="line">    memmove(result, aBlock, aBlock-&gt;descriptor-&gt;size); // bitcopy first</div><div class="line"></div><div class="line">    // 7</div><div class="line">    result-&gt;flags &amp;= ~(BLOCK_REFCOUNT_MASK);    // XXX not needed</div><div class="line">    result-&gt;flags |= BLOCK_NEEDS_FREE | 1;</div><div class="line"></div><div class="line">    // 8</div><div class="line">    result-&gt;isa = _NSConcreteMallocBlock;</div><div class="line"></div><div class="line">    // 9</div><div class="line">    if (result-&gt;flags &amp; BLOCK_HAS_COPY_DISPOSE) &#123;</div><div class="line">        (*aBlock-&gt;descriptor-&gt;copy)(result, aBlock); // do fixup</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>综上所述，已经可以解答问题1。把 block 赋值给self.handler的时候，在栈上生成的 block 被复制了一份放到堆上。而之后如果你把这个 block 当作 GCD 参数使用，GCD 函数内部会把该 block 再 copy 一遍，而此时 block 已经在堆上，则该 block 的引用计数加1。所以此时 block 的引用计数是大于1的，即使self对象被废弃 block 会被 release 一次，但它的引用计数仍然大于0，故而不会被废弃。<br>Tips:<br>其实在 ARC 开启的情况下，将只会有 NSConcreteGlobalBlock 和 NSConcreteMallocBlock 类型的 block。<br><img src="/images/20170531/block_work_in_ARC.png" alt=""><br>更多请查看<a href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html" target="_blank" rel="external">苹果官方文档</a></p>
+<p>2、在 block 内部使用weakSelf就是为了让 block 对象不持有self指向的对象，那在 block 内部又把weakSelf赋给strongSelf不就又持有self对象了么？又循环引用了？<br>理解这个问题就需要了解block捕获对象变量。<br>使用<strong>weak修饰的变量时</strong>weak是不会持有对象，它用一张 weak 表来管理对象和变量。赋值的时候它会以赋值对象的地址作为 key，变量的地址为 value，注册到 weak 表中。一旦该对象被废弃，就通过对象地址在 weak 表中找到变量的地址，赋值为 nil，然后将该条记录从 weak 表中删除。<br>那使用 “weak-strong dance” 的时候是怎么个情况呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">struct __block_impl &#123;</div><div class="line">    void *isa;</div><div class="line">    int Flags;</div><div class="line">    int Reserved;</div><div class="line">    void *FuncPtr;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">struct __xx_block_impl_y &#123;</div><div class="line">    struct __block_impl impl;</div><div class="line">    __weak OCClass *occlass;</div><div class="line">    // ...</div><div class="line">&#125;;</div><div class="line"></div><div class="line">static void __xx_block_func_y(struct __xx_block_impl_y *__cself) &#123;</div><div class="line">    OCClass *occlass = __cself -&gt; occlass;</div><div class="line">    // ...</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>每次使用<strong>weak变量的时候，都会取出该变量指向的对象并 retain，然后将该对象注册到 autoreleasepool 中。通过上述代码我们可以发现，在</strong>xx_block_func_y中，局部变量occlass会持有捕获的对象，然后对象会被注册到 autoreleasepool。这是延长对象生命周期的关键（保证在执行 Block 期间对象不会被废弃），但这不会造成循环引用，当函数执行结束，变量occlass超出作用域，过一会儿（一般一次 RunLoop 之后），对象就被释放了。所以 weak-strong dance 的行为非常符合预期：延长捕获对象的生命周期，一旦 Block 执行完，对象被释放，而 Block 也会被释放（如果被 GCD 之类的 API copy 过一次增加了引用计数，那最终也会被 GCD 释放）。</p>
+<p>3、使用”weak-strong dance”一定安全吗？<br>其实通过问题2就可以理解，”weak-strong dance”并不是安全的，”weak-strong dance”只实用与block已经捕获到对象的情况，”weak-strong dance”并不能保证 block 所引用对象的释放时机在执行之后， 更安全的做法应该是在 block 内部使用 strongSelf 时进行 nil检测，这样可以避免上述情况。</p>
+<p>参考：<br><a href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html" target="_blank" rel="external">https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html</a><br><a href="http://www.galloway.me.uk/2013/05/a-look-inside-blocks-episode-3-block-copy/" target="_blank" rel="external">http://www.galloway.me.uk/2013/05/a-look-inside-blocks-episode-3-block-copy/</a><br><a href="http://blog.devtang.com/2013/07/28/a-look-inside-blocks/" target="_blank" rel="external">http://blog.devtang.com/2013/07/28/a-look-inside-blocks/</a><br><a href="http://albertodebortoli.com/blog/2013/08/03/objective-c-blocks-caveat/" target="_blank" rel="external">http://albertodebortoli.com/blog/2013/08/03/objective-c-blocks-caveat/</a><br><a href="http://www.jianshu.com/p/737999a30544" target="_blank" rel="external">http://www.jianshu.com/p/737999a30544</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/weak-strong-dance/" rel="tag"># weak-strong dance</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/30/20170530/" rel="next" title="clang源码编译安装">
+                <i class="fa fa-chevron-left"></i> clang源码编译安装
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/06/01/20170601/" rel="prev" title="iOS包大小瘦身方案（一）- iOS安装包构成">
+                iOS包大小瘦身方案（一）- iOS安装包构成 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="花生-sniper" />
+          <p class="site-author-name" itemprop="name">花生-sniper</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">22</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">花生-sniper</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
