@@ -382,7 +382,7 @@ SonarQube是一个开源的代码质量管理系统，与当今众多的代码�
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>邂逅SoarQube：<br>1、人工代码审查费时费力。<br>2、美国老是使用拖拽式声呐(sonar)在中国周边海域窥视。<br>3、SonarQube开源且自搭环境，可自由掌控。<br>以上有点牵强，不管怎么说，反正现在已经选择了SonarQube，就用好它吧。😊</p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>邂逅SoarQube：<br>1、人工代码审查费时费力。<br>2、美国老是使用拖拽式声呐(sonar)在中国周边海域窥视。<br>3、SonarQube开源且自搭环境，可自由掌控。<br>以上有点牵强，不管怎么说，反正现在已经选择了SonarQube，就用好它吧。😊</p>
 <p><img src="/images/Sonar/sonarqube_logo.jpg" alt=""><br>SonarQube是一个开源的代码质量管理系统，与当今众多的代码质量管理工具相比，SonarQube更具有特色和竞争力，其优势主要体现为：它是一个开源的代码质量管理系统，支持 25+ 种语言，可以通过使用插件机制与 eclipse 和 JIRA 等其他外部工具集成，从而实现了对代码的质量的全面自动化分析和管理。<br>SonarQube的主要特性：<br>1、通过插件扩展<br>支持新的编程语言、添加规则引擎、计算更复杂的度量指标，这些都可以借助强大的插件扩展机制。目前已经有超过50个插件可用。通过插件机制，Sonar 可以集成不同的测试工具，代码分析工具，以及持续集成工具，比如pmd-cpd、checkstyle、findbugs、Jenkins。通过不同的插件对这些结果进行再加工处理，通过量化的方式度量代码质量的变化，从而可以方便地对不同规模和种类的工程进行代码质量管理。<br>2、支持多种编程语言<br>借助插件，目前已经支持超过25+种的编程语言，包括：Java，C#, C/C++, PL/SQL, Cobol, ABAP, Objective-C等。<br>3、集成CI<br>同时 Sonar 还对大量的持续集成工具提供了接口支持，可以很方便地在持续集成中使用Sonar<br>4、围绕着代码质量<br>SonarQube是一个Web应用程序（B/S)。规则、警告、例外、设置……都可以在线配置。通过自己的数据库，SonarQube不仅仅是展示各项指标的综合结果，同时也结合历史质量数据。<br>5、国际化<br>Sonar 的插件还可以对 Java 以外的其他编程语言提供支持，对国际化以及报告文档化也有良好的支持。</p>
 <p>SonarQube的主要作用：<br>通过sonar可以有效检测以下在程序开发过程中的七大问题：<br><a href="https://docs.sonarqube.org/display/HOME/Developers%27+Seven+Deadly+Sins" target="_blank" rel="external">Developers’ Seven Deadly Sins</a><br>1、潜在的bug(Bugs and Potential Bugs)<br>sonar可以通过PMD,CheckStyle,Findbugs等等代码规则检测工具检测出潜在的bug。<br><img src="/images/Sonar/sins_potential_bugs.png" alt=""><br>2、违反代码标准(Coding Standards Breach)<br>sonar可以通过PMD,CheckStyle,Findbugs等等代码规则检测工具规范代码编写。<br>3、重复代码(Duplications)<br>显然程序中包含大量复制粘贴的代码是质量低下的，sonar可以展示源码中重复严重的地方。<br><img src="/images/Sonar/sins_duplications.png" alt=""><br>4、单元测试缺失(Lack of Unit Tests)<br>sonar可以很方便地统计并展示单元测试覆盖率。<br><img src="/images/Sonar/sins_lack_of_unit_tests.png" alt=""><br>5、糟糕的复杂度分布(Bad Distribution of Complexity)<br>文件、类、方法等，如果复杂度过高将难以改变，这会使得开发人员难以理解它们，且如果没有自动化的单元测试，对于程序中的任何组件的改变都将可能导致需要全面的回归测试。<br><img src="/images/Sonar/sins_bad_distribution_of_complexity.png" alt=""><br>6、糟糕的设计(Spaghetti Design)<br>通过sonar可以找出循环，展示包与包、类与类之间的相互依赖关系。<br>通过sonar可以检测自定义的架构规则。<br>通过sonar可以管理第三方库。<br>通过sonar可以利用LCOM4检测单个任务规则的应用情况。<br>通过sonar检测耦合。<br>7、缺乏足够多的注释(Not Enough or Too Many Comments)<br>没有注释将使代码可读性变差，特别是当不可避免地出现人员变动时，程序的可读性将大幅下降，而过多的注释又会使得开发人员将精力过多地花费在阅读注释上，亦违背初衷。</p>
 <p>SonarQube架构以及集成工作流：<br><img src="/images/Sonar/sonarqube_architecture_2.png" alt=""><br><img src="/images/Sonar/sonarqube_architecture.png" alt=""><br><img src="/images/Sonar/sonarqube_integration_2.png" alt=""><br><img src="/images/Sonar/sonarqube_integration.png" alt=""><br>详情请参考：<a href="https://docs.sonarqube.org/display/SONAR/Architecture+and+Integration" target="_blank" rel="external">https://docs.sonarqube.org/display/SONAR/Architecture+and+Integration</a></p>
@@ -500,7 +500,7 @@ SonarQube是一个开源的代码质量管理系统，与当今众多的代码�
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

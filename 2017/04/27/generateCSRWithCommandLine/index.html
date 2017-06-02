@@ -351,7 +351,7 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？<br><img src="/images/CSR/generate_signing_flow.png" alt=""><br>根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。<br>那么本章只介绍生成私钥，然后通过私钥生成CSR文件。<br>1、生成私钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -out privateSigningKey.key 2048</div></pre></td></tr></table></figure></p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>通过kechain生成CertificateSigningRequest.certSigningRequest文件时，一直有个疑惑：私钥是如何生成的，生成的私钥又在哪里？<br><img src="/images/CSR/generate_signing_flow.png" alt=""><br>根据上图的应用程序签名的流程，首先生成私钥、然后生成CSR文件，然后根据CSR文件生成证书，然后根据证书生成provisionProfile文件等。<br>那么本章只介绍生成私钥，然后通过私钥生成CSR文件。<br>1、生成私钥：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ openssl genrsa -out privateSigningKey.key 2048</div></pre></td></tr></table></figure></p>
 <p>2、生成CSR：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ openssl req -new \</div><div class="line">        -key privateSigningKey.key \</div><div class="line">        -out CertificateSigningRequest.certificateSigningRequest \</div><div class="line">        -subj &quot;/emailAddress=[Your email address]/commonName=[Your Name]/countryName=[Your country code]&quot;</div></pre></td></tr></table></figure></p>
 <p>参考：<br><a href="https://pewpewthespells.com/blog/migrating_code_signing.html" target="_blank" rel="external">https://pewpewthespells.com/blog/migrating_code_signing.html</a></p>
 
@@ -457,7 +457,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

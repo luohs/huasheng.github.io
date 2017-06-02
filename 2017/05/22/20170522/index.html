@@ -351,7 +351,7 @@
       
 
       
-        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/images/20170522/accessorMethodTips.png" alt=""><br>其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：<br>第一：父类init/dealloc使用setter。<br>第二：子类重写了父类的setter。<br>如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类init方法调用了某个属性的setter方法，由于面向对象的多态特性就会调用子类重写了父类的那个setter方法，但是此时子类还未初始化，所有就会出现问题。<br>同理，当父类进行dealloc时，此时会优先调用子类的dealloc方法，如果父类在dealloc时调用了setter并且该setter被子类重写，同样由于面向对象的多态性就会调用到子类的setter。而此时子类的dealloc已经被调用了，那么再执行子类的代码就会出现问题。</p>
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/20170522/accessorMethodTips.png" alt=""><br>其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：<br>第一：父类init/dealloc使用setter。<br>第二：子类重写了父类的setter。<br>如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类init方法调用了某个属性的setter方法，由于面向对象的多态特性就会调用子类重写了父类的那个setter方法，但是此时子类还未初始化，所有就会出现问题。<br>同理，当父类进行dealloc时，此时会优先调用子类的dealloc方法，如果父类在dealloc时调用了setter并且该setter被子类重写，同样由于面向对象的多态性就会调用到子类的setter。而此时子类的dealloc已经被调用了，那么再执行子类的代码就会出现问题。</p>
 <p>参考：<br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5</a></p>
 
       
@@ -456,7 +456,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

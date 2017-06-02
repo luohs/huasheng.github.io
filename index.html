@@ -256,122 +256,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/201706021326/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="花生-sniper">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="三味猪屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/06/02/201706021326/" itemprop="url">
-                  未命名
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-02T13:26:26+08:00">
-                2017-06-02
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script>
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/20170603/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -468,7 +352,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>clang作为LLVM提供的编译器前端，可将用户的源代码(C/C++/Objective-C)编译成语言/目标设备无关的IR(Intermediate Representation)实现。其可提供良好的插件支持，容许用户在编译时，运行额外的自定义动作。<br>本篇是基于clang的插件特性，编写一个clang插件作为一个源代码级别的分析工具(或编译器)生成各种中间文件。编译完成后，还需编写一个工具去分析所有包含源码的方法(包括用户编写，以及引入的第三方库源代码)，检查这些方法中哪些最终可被程序主入口调用，剩余即是疑似无用代码。从而分析出源代码中那些确定无用的代码，便可以有效去除无用的代码从而减少包大小。<br>LLVM工程包含了一组模块化，可复用的编辑器和工具链：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LLVM Core:包含一个现在的源代码/目标设备无关的优化器，一集一个针对很多主流(甚至于一些非主流)的CPU的汇编代码生成支持。</div><div class="line">Clang:一个C/C++/Objective-C编译器，致力于提供令人惊讶的快速编译，极其有用的错误和警告信息，提供一个可用于构建很棒的源代码级别的工具.</div><div class="line">dragonegg: gcc插件，可将GCC的优化和代码生成器替换为LLVM的相应工具。</div><div class="line">LLDB:基于LLVM提供的库和Clang构建的优秀的本地调试器。</div><div class="line">libc++、libc++ ABI: 符合标准的，高性能的C++标准库实现，以及对C++11的完整支持。</div><div class="line">compiler-rt:针对__fixunsdfdi和其他目标机器上没有一个核心IR(intermediate representation)对应的短原生指令序列时，提供高度调优过的底层代码生成支持。</div><div class="line">OpenMP: Clang中对多平台并行编程的runtime支持。</div><div class="line">vmkit:基于LLVM的Java和.NET虚拟机实</div><div class="line">polly: 支持高级别的循环和数据本地化优化支持的LLVM框架。</div><div class="line">libclc: OpenCL标准库的实现</div><div class="line">klee: 基于LLVM编译基础设施的符号化虚拟机</div><div class="line">SAFECode:内存安全的C/C++编译器</div><div class="line">lld: clang/llvm内置的链接器</div></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>clang作为LLVM提供的编译器前端，可将用户的源代码(C/C++/Objective-C)编译成语言/目标设备无关的IR(Intermediate Representation)实现。其可提供良好的插件支持，容许用户在编译时，运行额外的自定义动作。<br>本篇是基于clang的插件特性，编写一个clang插件作为一个源代码级别的分析工具(或编译器)生成各种中间文件。编译完成后，还需编写一个工具去分析所有包含源码的方法(包括用户编写，以及引入的第三方库源代码)，检查这些方法中哪些最终可被程序主入口调用，剩余即是疑似无用代码。从而分析出源代码中那些确定无用的代码，便可以有效去除无用的代码从而减少包大小。<br>LLVM工程包含了一组模块化，可复用的编辑器和工具链：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">LLVM Core:包含一个现在的源代码/目标设备无关的优化器，一集一个针对很多主流(甚至于一些非主流)的CPU的汇编代码生成支持。</div><div class="line">Clang:一个C/C++/Objective-C编译器，致力于提供令人惊讶的快速编译，极其有用的错误和警告信息，提供一个可用于构建很棒的源代码级别的工具.</div><div class="line">dragonegg: gcc插件，可将GCC的优化和代码生成器替换为LLVM的相应工具。</div><div class="line">LLDB:基于LLVM提供的库和Clang构建的优秀的本地调试器。</div><div class="line">libc++、libc++ ABI: 符合标准的，高性能的C++标准库实现，以及对C++11的完整支持。</div><div class="line">compiler-rt:针对__fixunsdfdi和其他目标机器上没有一个核心IR(intermediate representation)对应的短原生指令序列时，提供高度调优过的底层代码生成支持。</div><div class="line">OpenMP: Clang中对多平台并行编程的runtime支持。</div><div class="line">vmkit:基于LLVM的Java和.NET虚拟机实</div><div class="line">polly: 支持高级别的循环和数据本地化优化支持的LLVM框架。</div><div class="line">libclc: OpenCL标准库的实现</div><div class="line">klee: 基于LLVM编译基础设施的符号化虚拟机</div><div class="line">SAFECode:内存安全的C/C++编译器</div><div class="line">lld: clang/llvm内置的链接器</div></pre></td></tr></table></figure></p>
 <p><img src="/images/20170603/llvm_overView.png" alt=""><br><a href="http://llvm.org" target="_blank" rel="external">原文链接</a></p>
 <p>1、clang源码并编译安装<br>查看<a href="https://luohs.github.io/2017/05/30/20170530/" target="_blank" rel="external">clang源码并编译安装</a><br>2、编写clang插件<br>要实现自定义的Clang插件(以C++为例)，应按照以下步骤:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">1.自定义继承自</div><div class="line">	clang::PluginASTAction(基于consumer的AST前端Action抽象基类)</div><div class="line">	clang::ASTConsumer(用于客户读取AST的抽象基类)，</div><div class="line">	clang::RecursiveASTVisitor(前序或后续地深度优先搜索整个    	   AST，并访问每一个节点的基类)等基类，</div><div class="line">2.根据自身需要重载</div><div class="line">	PluginASTAction::CreateASTConsumer，</div><div class="line">	PluginASTAction::ParseArgs,</div><div class="line">  ASTConsumer::HandleTranslationUnit</div><div class="line">  RecursiveASTVisitor::VisitDecl</div><div class="line">	RecursiveASTVisitor::VisitStmt</div><div class="line">  等方法，实现自定义的分析逻辑。</div><div class="line">3.注册插件</div><div class="line">	static FrontendPluginRegistry::Add&lt;MyPlugin&gt; X(&quot;my-plugin-name&quot;, &quot;my-plugin-description&quot;);</div><div class="line">4.编译时载入插件</div><div class="line">	clang++ *** -Xclang -load -Xclang path-of-your-plugin.dylib -Xclang -add-plugin -Xclang your-pluginName -Xclang -plugin-arg-your-pluginName -Xclang your-pluginName-param</div></pre></td></tr></table></figure></p>
 <p>编写clang插件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">#include &lt;iostream&gt;</div><div class="line">#include &quot;clang/Frontend/FrontendPluginRegistry.h&quot;</div><div class="line">#include &quot;clang/AST/AST.h&quot;</div><div class="line">#include &quot;clang/AST/ASTConsumer.h&quot;</div><div class="line">#include &quot;clang/Frontend/CompilerInstance.h&quot;</div><div class="line">#include &quot;clang/AST/RecursiveASTVisitor.h&quot;</div><div class="line">using namespace clang;</div><div class="line">using namespace std;</div><div class="line">using namespace llvm;</div><div class="line">namespace ClangPlugin</div><div class="line">&#123;</div><div class="line">    class ClangPluginASTVisitor : public RecursiveASTVisitor&lt;ClangPluginASTVisitor&gt;</div><div class="line">    &#123;</div><div class="line">    private:</div><div class="line">        ASTContext *context;</div><div class="line">    public:</div><div class="line">        void setContext(ASTContext &amp;context)&#123;</div><div class="line">            this-&gt;context = &amp;context;</div><div class="line">        &#125;</div><div class="line">        bool VisitDecl(Decl *decl)&#123;</div><div class="line">            if(isa&lt;ObjCImplDecl&gt;(decl))&#123;</div><div class="line">                ObjCImplDecl *interDecl = (ObjCImplDecl*)decl;</div><div class="line">                cout&lt;&lt;&quot;[KWLM]Class Implementation Found:&quot;&lt;&lt;interDecl-&gt;getNameAsString()&lt;&lt;endl;</div><div class="line">            &#125;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    class ClangPluginASTConsumer : public ASTConsumer</div><div class="line">    &#123;</div><div class="line">    private:</div><div class="line">        ClangPluginASTVisitor visitor;</div><div class="line">        void HandleTranslationUnit(ASTContext &amp;context)&#123;</div><div class="line">            visitor.setContext(context);</div><div class="line">            visitor.TraverseDecl(context.getTranslationUnitDecl());</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    class ClangPluginASTAction : public PluginASTAction</div><div class="line">    &#123;</div><div class="line">    public:</div><div class="line">        unique_ptr&lt;ASTConsumer&gt; CreateASTConsumer(CompilerInstance &amp;Compiler,StringRef InFile)&#123;</div><div class="line">            return unique_ptr&lt;ClangPluginASTConsumer&gt;(new ClangPluginASTConsumer);</div><div class="line">        &#125;</div><div class="line">        bool ParseArgs(const CompilerInstance &amp;CI, const std::vector&lt;std::string&gt;&amp; args)&#123;</div><div class="line">            return true;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">&#125;</div><div class="line">static clang::FrontendPluginRegistry::Add&lt;ClangPlugin::ClangPluginASTAction&gt;X(&quot;ClangPlugin&quot;, &quot;ClangPlugin&quot;);</div></pre></td></tr></table></figure></p>
@@ -611,7 +495,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><a href="https://osdn.net/frs/g_redir.php?m=netix&amp;f=%2Fcloc%2Fcloc%2Fv1.64%2Fcloc-1.64.pl" target="_blank" rel="external">cloc-1.64.pl</a><br><a href="https://github.com/AlDanial/cloc" target="_blank" rel="external">CLOC源码地址</a><br>用法一：直接执行perl脚本，如图：<br><img src="/images/20170601A/cloc_script.png" alt=""><br>用法二：通过brew安装cloc，使用命令行方式，如图：<br><img src="/images/20170601A/cloc_commandline.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p><a href="https://osdn.net/frs/g_redir.php?m=netix&amp;f=%2Fcloc%2Fcloc%2Fv1.64%2Fcloc-1.64.pl" target="_blank" rel="external">cloc-1.64.pl</a><br><a href="https://github.com/AlDanial/cloc" target="_blank" rel="external">CLOC源码地址</a><br>用法一：直接执行perl脚本，如图：<br><img src="/images/20170601A/cloc_script.png" alt=""><br>用法二：通过brew安装cloc，使用命令行方式，如图：<br><img src="/images/20170601A/cloc_commandline.png" alt=""></p>
 
           
         
@@ -746,7 +630,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>要想将iOS安装包瘦身，首先得熟悉iOS安装包的构成，然后根据各个部分逐个优化。<br>1、iOS安装包构成：<br>iOS安装包是以后缀名为“ipa”一个压缩包，该压缩包内容大致包含三块内容：可执行文件、资源文件、签名文件<br>构成如下图：<br><img src="/images/20170601/ipa_archive.png" alt=""><br>2、可执行文件构成：<br>可执行文件是通过编译器、连接器将我们编写的代码、静态库、动态库编译成的文件，大致可分为代码段和数据段<br>构成如下：<br><img src="/images/20170601/ipa_mach.png" alt=""><br>3、可执行文件支持的cpu架构以及安装包大小关系<br>以“滴滴打车”为例，对比去年3.9.7版本以及最新4.3.10版本<br>3.9.7版本：<br><img src="/images/20170601/didi_3_9_7.png" alt=""><br><img src="/images/20170601/didi_3_9_7_2.png" alt=""><br><img src="/images/20170601/didi_3_9_7_3.png" alt=""><br>4.3.10版本：<br><img src="/images/20170601/didi_4_3_10_1.png" alt=""><br><img src="/images/20170601/didi_4_3_10_2.png" alt=""><br><img src="/images/20170601/didi_4_3_10_3.png" alt=""><br>由此可见支持的CPU体系架构越多，对安装包大小成正比例影响。<br>4、可执行文件各段所占大小<br>64位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm64_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_3.png" alt=""><br>32位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm7_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_3.png" alt=""><br>5、第三方SDK大小占比<br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm64.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm7.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_2.png" alt=""><br><img src="/images/20170601/ipa_archive_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_size_2.png" alt=""><br>通过比较不难看出第三方SDK编译出来的可执行文件占比达到62.5%<br>6、资源文件对安装包的影响<br>未对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_4.png" alt=""><br>对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_3.png" alt=""><br>下图为对我们app中图片资源进行无损压缩的效果：<br><img src="/images/20170601/imageOptim.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>要想将iOS安装包瘦身，首先得熟悉iOS安装包的构成，然后根据各个部分逐个优化。<br>1、iOS安装包构成：<br>iOS安装包是以后缀名为“ipa”一个压缩包，该压缩包内容大致包含三块内容：可执行文件、资源文件、签名文件<br>构成如下图：<br><img src="/images/20170601/ipa_archive.png" alt=""><br>2、可执行文件构成：<br>可执行文件是通过编译器、连接器将我们编写的代码、静态库、动态库编译成的文件，大致可分为代码段和数据段<br>构成如下：<br><img src="/images/20170601/ipa_mach.png" alt=""><br>3、可执行文件支持的cpu架构以及安装包大小关系<br>以“滴滴打车”为例，对比去年3.9.7版本以及最新4.3.10版本<br>3.9.7版本：<br><img src="/images/20170601/didi_3_9_7.png" alt=""><br><img src="/images/20170601/didi_3_9_7_2.png" alt=""><br><img src="/images/20170601/didi_3_9_7_3.png" alt=""><br>4.3.10版本：<br><img src="/images/20170601/didi_4_3_10_1.png" alt=""><br><img src="/images/20170601/didi_4_3_10_2.png" alt=""><br><img src="/images/20170601/didi_4_3_10_3.png" alt=""><br>由此可见支持的CPU体系架构越多，对安装包大小成正比例影响。<br>4、可执行文件各段所占大小<br>64位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm64_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm64_3.png" alt=""><br>32位架构：<br><img src="/images/20170601/ipa_archive_linkmap_arm7_1.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_2.png" alt=""><br><img src="/images/20170601/ipa_archive_linkmap_arm7_3.png" alt=""><br>5、第三方SDK大小占比<br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm64.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_linkmap_arm7.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_sdk_size_2.png" alt=""><br><img src="/images/20170601/ipa_archive_size_1.png" alt=""><br><img src="/images/20170601/ipa_archive_size_2.png" alt=""><br>通过比较不难看出第三方SDK编译出来的可执行文件占比达到62.5%<br>6、资源文件对安装包的影响<br>未对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_4.png" alt=""><br>对图片资源进行无损压缩之后包大小<br><img src="/images/20170601/ipa_archive_size_3.png" alt=""><br>下图为对我们app中图片资源进行无损压缩的效果：<br><img src="/images/20170601/imageOptim.png" alt=""></p>
 <p>Tips：<br>1、查看可执行文件大小：<br><img src="/images/20170601/linkmap_setting_1.png" alt=""><br><img src="/images/20170601/linkmap_setting_2.png" alt=""><br><img src="/images/20170601/linkmap_used.png" alt=""><br><a href="https://github.com/luohs/luohs.github.io/blob/master/images/20170601/linkmap.js" target="_blank" rel="external">linkmap.js</a><br>2、MachOView使用：<br><a href="http://sourceforge.net/projects/machoview/" target="_blank" rel="external">MachOView下载地址</a><br><a href="https://github.com/gdbinit/MachOView" target="_blank" rel="external">MachOView源码地址</a><br>3、ImageOptim使用：<br><a href="https://imageoptim.com/mac" target="_blank" rel="external">ImageOptim下载地址</a><br>4、去除工程中多余的图片资源：<br>a、脚本<br>详见<a href="https://stackoverflow.com/questions/6113243/how-to-find-unused-images-in-an-xcode-project/6113449#6113449" target="_blank" rel="external">链接</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">#!/bin/sh</div><div class="line">PROJ=`find . -name &apos;*.xib&apos; -o -name &apos;*.[mh]&apos;`</div><div class="line">for png in `find . -name &apos;*.png&apos;`</div><div class="line">do</div><div class="line">name=`basename $png`</div><div class="line">if ! grep -qhs &quot;$name&quot; &quot;$PROJ&quot;; then</div><div class="line">    echo &quot;$png is not referenced&quot;</div><div class="line">fi</div><div class="line">done</div></pre></td></tr></table></figure></p>
 <p>b、Unused<br><a href="http://jeffhodnett.github.io/Unused/" target="_blank" rel="external">Unused</a><br>c、LSUnusedResources<br><a href="https://github.com/tinymind/LSUnusedResources/" target="_blank" rel="external">LSUnusedResources</a></p>
 
@@ -883,7 +767,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：<br>1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。<br>如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃，但 Block 还是会执行，会打印“self is (null)”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line"></div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    self.handler = ^&#123;</div><div class="line">        __strong typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        NSLog(@&quot;self is %@&quot;, strongSelf);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    NSTimeInterval interval = 6.0;</div><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(interval * NSEC_PER_SEC)), dispatch_get_main_queue(), weakSelf.handler);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>使用block时利用”weak-strong dance”解决循环引用大家都知道，但这里有三点值得注意：<br>1、当self指向的对象已经被废弃的情况下，持有block成员变量也不存在了，这个时候block对象应该已经没有被变量所持有了，它的引用计数应该已经为0了，它应该被废弃了啊，为什么它还能继续存在并执行。<br>如以下代码，在 block 执行前退出这个页面的话，该 Controller 实例会被废弃，但 Block 还是会执行，会打印“self is (null)”。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">- (void)viewDidLoad &#123;</div><div class="line">    [super viewDidLoad];</div><div class="line"></div><div class="line">    __weak typeof(self) weakSelf = self;</div><div class="line">    self.handler = ^&#123;</div><div class="line">        __strong typeof(weakSelf) strongSelf = weakSelf;</div><div class="line">        NSLog(@&quot;self is %@&quot;, strongSelf);</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    NSTimeInterval interval = 6.0;</div><div class="line">    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(interval * NSEC_PER_SEC)), dispatch_get_main_queue(), weakSelf.handler);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>理解这个问题需要了解block原理，简单一点的说，block有三种类型：<br>NSConcreteStackBlock（栈）<br>NSConcreteGlobalBlock（全局）<br>NSConcreteMallocBlock（堆）</p>
 <p>如何实现这三种类型的block：<br><img src="/images/20170531/block_objc.png" alt=""><br>使用<code>clang -rewrite-objc $filePath</code>将OC代码转化为C++代码实现。<a href="https://luohs.github.io/2017/05/30/20170530/" target="_blank" rel="external">如何安装编译clang</a><br><img src="/images/20170531/clang_rewrite.png" alt=""><br><img src="/images/20170531/block_clang.png" alt=""><br>如果 block 在记述全局变量的地方被设置或者 block 没有捕获外部变量，那就生成一个 NSConcreteGlobalBlock 实例。其它情况都会生成一个 NSConcreteStackBlock 实例，也就是说，它是在栈上的，所以一旦它所属的变量超出了变量作用域，该 block 就被废弃了。而当发生以下任一情况时：<br>a、手动调用 block 的实例方法copy。<br>b、block 作为函数返回值返回。<br>c、将 block 赋值给附有__strong修饰符的成员变量。<br>d、在方法名中含有usingBlock的 Cocoa 框架方法或 GCD 的 API 中传递 block。<br>所以NSConcreteMallocBlock 类型的 block 通常不会在源码中直接出现。<br><a href="http://www.galloway.me.uk/2013/05/a-look-inside-blocks-episode-3-block-copy/" target="_blank" rel="external">看一下Block_copy()实现</a>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line">static void *_Block_copy_internal(const void *arg, const int flags) &#123;</div><div class="line">    struct Block_layout *aBlock;</div><div class="line">    const bool wantsOne = (WANTS_ONE &amp; flags) == WANTS_ONE;</div><div class="line"></div><div class="line">    // 1</div><div class="line">    if (!arg) return NULL;</div><div class="line"></div><div class="line">    // 2</div><div class="line">    aBlock = (struct Block_layout *)arg;</div><div class="line"></div><div class="line">    // 3</div><div class="line">    if (aBlock-&gt;flags &amp; BLOCK_NEEDS_FREE) &#123;</div><div class="line">        // latches on high</div><div class="line">        latching_incr_int(&amp;aBlock-&gt;flags);</div><div class="line">        return aBlock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 4</div><div class="line">    else if (aBlock-&gt;flags &amp; BLOCK_IS_GLOBAL) &#123;</div><div class="line">        return aBlock;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    // 5</div><div class="line">    struct Block_layout *result = malloc(aBlock-&gt;descriptor-&gt;size);</div><div class="line">    if (!result) return (void *)0;</div><div class="line"></div><div class="line">    // 6</div><div class="line">    memmove(result, aBlock, aBlock-&gt;descriptor-&gt;size); // bitcopy first</div><div class="line"></div><div class="line">    // 7</div><div class="line">    result-&gt;flags &amp;= ~(BLOCK_REFCOUNT_MASK);    // XXX not needed</div><div class="line">    result-&gt;flags |= BLOCK_NEEDS_FREE | 1;</div><div class="line"></div><div class="line">    // 8</div><div class="line">    result-&gt;isa = _NSConcreteMallocBlock;</div><div class="line"></div><div class="line">    // 9</div><div class="line">    if (result-&gt;flags &amp; BLOCK_HAS_COPY_DISPOSE) &#123;</div><div class="line">        (*aBlock-&gt;descriptor-&gt;copy)(result, aBlock); // do fixup</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    return result;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>综上所述，已经可以解答问题1。把 block 赋值给self.handler的时候，在栈上生成的 block 被复制了一份放到堆上。而之后如果你把这个 block 当作 GCD 参数使用，GCD 函数内部会把该 block 再 copy 一遍，而此时 block 已经在堆上，则该 block 的引用计数加1。所以此时 block 的引用计数是大于1的，即使self对象被废弃 block 会被 release 一次，但它的引用计数仍然大于0，故而不会被废弃。<br>Tips:<br>其实在 ARC 开启的情况下，将只会有 NSConcreteGlobalBlock 和 NSConcreteMallocBlock 类型的 block。<br><img src="/images/20170531/block_work_in_ARC.png" alt=""><br>更多请查看<a href="https://developer.apple.com/library/content/releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html" target="_blank" rel="external">苹果官方文档</a></p>
@@ -1025,7 +909,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>环境配置：<br>1、<a href="https://luohs.github.io/2017/05/27/20170527/" target="_blank" rel="external">配置Git</a><br>2、安装cmake编译环境<br><img src="/images/20170530/cmake_install.png" alt=""><br><img src="/images/20170530/cmake_install_success.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>环境配置：<br>1、<a href="https://luohs.github.io/2017/05/27/20170527/" target="_blank" rel="external">配置Git</a><br>2、安装cmake编译环境<br><img src="/images/20170530/cmake_install.png" alt=""><br><img src="/images/20170530/cmake_install_success.png" alt=""></p>
 <p>下载代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">cd /opt</div><div class="line">sudo mkdir llvm</div><div class="line">sudo chown `whoami` llvm</div><div class="line">cd llvm</div><div class="line">export LLVM_HOME=`pwd`</div><div class="line"></div><div class="line">git clone -b release_39 git@github.com:llvm-mirror/llvm.git llvm</div><div class="line">git clone -b release_39 git@github.com:llvm-mirror/clang.git llvm/tools/clang</div><div class="line">git clone -b release_39 git@github.com:llvm-mirror/clang-tools-extra.git llvm/tools/clang/tools/extra</div><div class="line">git clone -b release_39 git@github.com:llvm-mirror/compiler-rt.git llvm/projects/compiler-rt</div></pre></td></tr></table></figure></p>
 <p><img src="/images/20170530/clang_git_clone.png" alt=""></p>
 <p>编译代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir llvm_build</div><div class="line">cd llvm_build</div><div class="line">cmake ../llvm -DCMAKE_BUILD_TYPE:STRING=Release</div><div class="line">make -j`sysctl -n hw.logicalcpu`</div></pre></td></tr></table></figure></p>
@@ -1165,7 +1049,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>安装Git：<br>与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：<br>1、通过pkg或者dmg安装。<br><a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a><br>2、通过MacPorts安装。<br><code>$ sudo port install git-core +svn +doc +bash_completion +gitweb</code><br>3、通过homebrew安装。<br><code>brew install git</code></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>安装Git：<br>与大多数软件在Mac上安装一样，安装方式基本上都提供三种方式：<br>1、通过pkg或者dmg安装。<br><a href="http://sourceforge.net/projects/git-osx-installer/" target="_blank" rel="external">http://sourceforge.net/projects/git-osx-installer/</a><br>2、通过MacPorts安装。<br><code>$ sudo port install git-core +svn +doc +bash_completion +gitweb</code><br>3、通过homebrew安装。<br><code>brew install git</code></p>
 <p>设置Git账户及邮箱：<br>1、设置全局账户及邮箱<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name luohs</div><div class="line">$ git config --global user.email luohs@example.com</div></pre></td></tr></table></figure></p>
 <p>修改配置后，可以查看本地git配置文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ cat ~/.gitconfig</div><div class="line">[user]</div><div class="line">    name = luohs</div><div class="line">    email = luohs@example.com</div></pre></td></tr></table></figure></p>
 <p><img src="/images/20170527/gitconfig.png" alt=""><br>2、取消全局配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global --unset user.name</div><div class="line">$ git config --global --unset user.email</div></pre></td></tr></table></figure></p>
@@ -1307,7 +1191,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p><img src="/images/20170522/accessorMethodTips.png" alt=""><br>其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：<br>第一：父类init/dealloc使用setter。<br>第二：子类重写了父类的setter。<br>如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类init方法调用了某个属性的setter方法，由于面向对象的多态特性就会调用子类重写了父类的那个setter方法，但是此时子类还未初始化，所有就会出现问题。<br>同理，当父类进行dealloc时，此时会优先调用子类的dealloc方法，如果父类在dealloc时调用了setter并且该setter被子类重写，同样由于面向对象的多态性就会调用到子类的setter。而此时子类的dealloc已经被调用了，那么再执行子类的代码就会出现问题。</p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p><img src="/images/20170522/accessorMethodTips.png" alt=""><br>其实也并不是一刀切，所有的accessor都不能在init和dealloc中使用，只有同时满足以下两个条件时才会有问题：<br>第一：父类init/dealloc使用setter。<br>第二：子类重写了父类的setter。<br>如果父类的init中调用了某个属性的setter方法，当通过self=[super init]对子类进行初始化的时候，此时会优先调用调用父类的init方法，当执行父类的init方法时，父类init方法调用了某个属性的setter方法，由于面向对象的多态特性就会调用子类重写了父类的那个setter方法，但是此时子类还未初始化，所有就会出现问题。<br>同理，当父类进行dealloc时，此时会优先调用子类的dealloc方法，如果父类在dealloc时调用了setter并且该setter被子类重写，同样由于面向对象的多态性就会调用到子类的setter。而此时子类的dealloc已经被调用了，那么再执行子类的代码就会出现问题。</p>
 <p>参考：<br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW5</a></p>
 
           
@@ -1443,7 +1327,7 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>说到设置导航栏返回按钮事件，首先想到是设置self.navigationItem.leftBarButtonItem。但是leftBarButtonItem与系统自带的backBarButtonItem在样式和frame是不一样的，特别是APP如果没有从整个框架层去统一导航栏的返回按钮，就会出现有的页面是系统自带的backBarButtonItem，有的页面是程序员设置的leftBarButtonItem，导致界面无一致性。<br>其实可以通过UINavigationBarDelegate提供的方法来设置我们自定义事件。<br><img src="/images/20170519/UINavigationBarDelegate.png" alt=""><br>我们可以为UINavigatonController创建一个类别(Category)来定制navigationBar: shouldPopItem:的逻辑。由于UINavigatonController自带的 UINavigationBar的delegate就是UINavigatonController本身，所以在创建导航栏的实例时不需要手动去设置delegate。<br>代码如下：<br><img src="/images/20170519/UIViewControllerNavigationBarButtonDelegate_2.png" alt=""><br><a href="https://github.com/onegray/UIViewController-BackButtonHandler" target="_blank" rel="external">UIViewController-BackButtonHandler</a>实现如下：<br><img src="/images/20170519/UIViewControllerNavigationBarButtonDelegate.png" alt=""></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>说到设置导航栏返回按钮事件，首先想到是设置self.navigationItem.leftBarButtonItem。但是leftBarButtonItem与系统自带的backBarButtonItem在样式和frame是不一样的，特别是APP如果没有从整个框架层去统一导航栏的返回按钮，就会出现有的页面是系统自带的backBarButtonItem，有的页面是程序员设置的leftBarButtonItem，导致界面无一致性。<br>其实可以通过UINavigationBarDelegate提供的方法来设置我们自定义事件。<br><img src="/images/20170519/UINavigationBarDelegate.png" alt=""><br>我们可以为UINavigatonController创建一个类别(Category)来定制navigationBar: shouldPopItem:的逻辑。由于UINavigatonController自带的 UINavigationBar的delegate就是UINavigatonController本身，所以在创建导航栏的实例时不需要手动去设置delegate。<br>代码如下：<br><img src="/images/20170519/UIViewControllerNavigationBarButtonDelegate_2.png" alt=""><br><a href="https://github.com/onegray/UIViewController-BackButtonHandler" target="_blank" rel="external">UIViewController-BackButtonHandler</a>实现如下：<br><img src="/images/20170519/UIViewControllerNavigationBarButtonDelegate.png" alt=""></p>
 
           
         
@@ -1578,7 +1462,143 @@
       
         
           
-            <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。<br><img src="/images/UIView中使用KVO的正确方式/KVO_remove.png" alt=""><br>按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observer（观察者）时内存就会出现异常。所以由此可以推断 Observer（观察者）在调用addObserver:forKeyPath:options:context:注册时不是被强引用的。<br>按照官方文档中描述，Observer（观察者）通常情况下是在init或者viewDidLoad时注册，在dealloc时移除。<br>所以在UIView我们会经常在init进行注册，在dealloc时进行注册。这本身没有问题，因为苹果官方文档也这么说的，但是总是感觉有点不好，能不能像UIViewController那样，通过生命周期的相关接口进行注册和取消呢？<br>负责UIView的生命周期的接口有：<br><img src="/images/UIView中使用KVO的正确方式/UIViewHierarchy.png" alt=""><br>UIView生命周期如下：<br>未添加subView：<br>push:willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews<br>pop:-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc<br>添加subView：<br>push:willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews-&gt;didAddSubview-&gt;layoutSubviews<br>pop:-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc-&gt;willRemoveSubview<br>如果在UIView中实现subView的KVO，那么可以在didAddSubview中注册，在willRemoveSubview中取消。<br>如果在UIView中实现自己的KVO，找到眼瞎也没有找到removeFromSuperview等字眼，真是失望透顶，但是大家有没有发现，在UIView生命周期中MoveToSuperview、MoveToWindow在push和pop都调用了，其中的奥秘就在参数：superview，当push时，是将UIView添加到superview，所以参数superview是不为nil的。当pop时，是将UIView从superview中移除，所以参数superview是nil。<br>正确的姿势：<br><img src="/images/UIView中使用KVO的正确方式/KVO.png" alt=""><br>参考：<br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVOBasics.html#//apple_ref/doc/uid/20002252-178612" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVOBasics.html#//apple_ref/doc/uid/20002252-178612</a></p>
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>相信大家对于KVO的使用应该不会存在什么疑问，addObserver:forKeyPath:options:context:与removeObserver:forKeyPath:context:必须成对出现。<br><img src="/images/UIView中使用KVO的正确方式/KVO_remove.png" alt=""><br>按照官方文档中描述，Observer（观察者）在被释放时是不会自动移除的，被观察的对象会继续发送通知而是不会去检查 Observer（观察者）的状态的，当发送给一个被释放的 Observer（观察者）时内存就会出现异常。所以由此可以推断 Observer（观察者）在调用addObserver:forKeyPath:options:context:注册时不是被强引用的。<br>按照官方文档中描述，Observer（观察者）通常情况下是在init或者viewDidLoad时注册，在dealloc时移除。<br>所以在UIView我们会经常在init进行注册，在dealloc时进行注册。这本身没有问题，因为苹果官方文档也这么说的，但是总是感觉有点不好，能不能像UIViewController那样，通过生命周期的相关接口进行注册和取消呢？<br>负责UIView的生命周期的接口有：<br><img src="/images/UIView中使用KVO的正确方式/UIViewHierarchy.png" alt=""><br>UIView生命周期如下：<br>未添加subView：<br>push:willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews<br>pop:-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc<br>添加subView：<br>push:willMoveToSuperview-&gt;didMoveToSuperview-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;layoutSubviews-&gt;didAddSubview-&gt;layoutSubviews<br>pop:-&gt;willMoveToWindow-&gt;didMoveToWindow-&gt;willMoveToSuperview-&gt;didMoveToSuperview-&gt;removeFromSuperview-&gt;dealloc-&gt;willRemoveSubview<br>如果在UIView中实现subView的KVO，那么可以在didAddSubview中注册，在willRemoveSubview中取消。<br>如果在UIView中实现自己的KVO，找到眼瞎也没有找到removeFromSuperview等字眼，真是失望透顶，但是大家有没有发现，在UIView生命周期中MoveToSuperview、MoveToWindow在push和pop都调用了，其中的奥秘就在参数：superview，当push时，是将UIView添加到superview，所以参数superview是不为nil的。当pop时，是将UIView从superview中移除，所以参数superview是nil。<br>正确的姿势：<br><img src="/images/UIView中使用KVO的正确方式/KVO.png" alt=""><br>参考：<br><a href="https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVOBasics.html#//apple_ref/doc/uid/20002252-178612" target="_blank" rel="external">https://developer.apple.com/library/content/documentation/Cocoa/Conceptual/KeyValueObserving/Articles/KVOBasics.html#//apple_ref/doc/uid/20002252-178612</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/iOS持续集成之Jenkins/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/05/11/iOS持续集成之Jenkins/" itemprop="url">
+                  iOS持续集成之Jenkins
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-11T10:48:28+08:00">
+                2017-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Jenkins/" itemprop="url" rel="index">
+                    <span itemprop="name">Jenkins</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>之前一篇关于iOS持续集成的文章<a href="https://luohs.github.io/2017/04/21/iOS的自动化打包/" target="_blank" rel="external">iOS的自动化打包</a>，文章主要介绍了iOS编译、签名的理论知识以及如何通过shell脚本调用第三方fastlane或者shell脚本调用Xcode提供的原生编译、签名命令进行打包、签名。<br>本篇介绍如果通过Jenkins构建打包任务、Jenkins远程登录以及Jenkins的Master/Slave架构。<br>1.1 Jenkins安装<br>Jenkins安装有几种方式：<br>a、通过pkg安装包安装<br><a href="https://jenkins.io/content/thank-you-downloading-os-x-installer/#stable" target="_blank" rel="external">https://jenkins.io/content/thank-you-downloading-os-x-installer/#stable</a><br>b、直接下载Jenkins.jar<br><a href="http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war" target="_blank" rel="external">http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war</a><br>c、使用Homebrew安装<br>brew install jenkins<br>三种安装方式的优缺点：<br>a、通过pkg安装包安装：使用pkg安装虽然是一键，但是比较坑的是安装在Shared用户下，这样的话很多本机的配置如SSH key等会有一些权限问题，环境变量使用也不是很方便，一些配置需要在Shared用户上单独配置，好处是干净，但是Xcode已经是在当前用户下了，Shared用户的配置只能干净一部分吧，干脆点，安装在当前用户，不用 Shared用户了。这样很多配置是不用在Jenkins中配置的，如上方所详的SSH key，以及各种环境变量都是在当前用户下，配置好后在Jenkins中不需要再配置。<br>b、直接下载Jenkins.jar：直接运行 jar 是最简单的方式，不能再后台运行，总是开一个终端来运行 Jenkins 万一不小心关掉了就不好了，如果要后台运行，就需要重新开启。<br>c、使用Homebrew安装：使用Homebrew安装Jenkins只需要一条命令，并且不存在以上两种安装方式的缺点，不需要额外配置，开机自动启动Jenkins服务而不需要手动启动。<br>Homebrew安装Jenkins如下：<br><code>brew install jenkins</code><br><img src="/images/iOS持续集成之Jenkins/jenkins_brew_install.png" alt=""><br>安装完成后可以使用 brew services 管理 Jenkins 启动<br>查看帮助说明<br><img src="/images/iOS持续集成之Jenkins/jenkins_services_start.png" alt=""><br>1.2 环境变量配置<br>终端输入以下命令，打开bash_profile文件<br>open ~/.bash_profile<br>主要配置各种环境变量<br>RVM环境变量:/usr/local/rvm/bin<br>ruby环境变量:/usr/local/rvm/rubies/ruby-2.3.0<br><img src="/images/iOS持续集成之Jenkins/jenkins_environment_variables_set.png" alt=""><br>注意<br>1、使用Jenkins调用pod命令报如下错误的解决办法就是在bash_profile中增加export LANG=en_US.UTF-8<br><img src="/images/iOS持续集成之Jenkins/jenkins_error_tips.png" alt=""><br>2、$HOME目录下的配置文件里关于RVM的环境配置<br><img src="/images/iOS持续集成之Jenkins/rvm_bashprofile.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_mkshrc.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_profile.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_bashrc.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_zshrc.png" alt=""><br>1.3 Jenkins配置<br>启动Jenkins服务之后，在浏览器中输入<br><a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a><br>使用Jenkins默认host和port<br><img src="/images/iOS持续集成之Jenkins/jenkins_setting_1.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_setting_2.png" alt=""><br>1.3.1 修改Jenkins的Host和Port<br>如果是通过brew install Jenkins方式安装的Jenkins时，修改Jenkins的host和port:<br>打开配置文件：/usr/local/opt/jenkins/homebrew.mxcl.jenkins.plist，找到httpListenAddress和httpPort,即为要修改的host和port。<br>1.3.2 如何安装Jenkins默认没有的插件<br>需要去Jenkins plugins官网下载需要的Jenkins插件<br>官网：<a href="https://wiki.jenkins-ci.org/display/JENKINS/Plugins" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Plugins</a><br>例子：<br>例如需要安装Jenkins RVM插件<br>1、rvm插件地址：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/RVM+Plugin" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/RVM+Plugin</a><br>2、下载到本地后，会得到一个rvm.hpi的文件<br>3、插件管理-高级-上传插件-选取文件-上传<br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_1.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_2.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_3.png" alt=""><br>1.3.3 Jenkins运行脚本配置<br><img src="/images/iOS持续集成之Jenkins/jenkins_execute_shell.png" alt=""><br>1.4 Jenkins的Master/Slave架构<br>1.4.1 Jenkins的Master/Slave架构<br>Jenkins的Master/Slave架构可以有效解决分布式构建。Master提供web接口让用户来管理job和slave，job可以运行在master本机或者被分配到slave上运行。一个master可以关联多个slave用来为不同的job或相同的job的不同配置来服务。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_architecture.png" alt=""><br>众所周知，开发mac系统软件时，编译环境必须使用 Mac OS系统，为了解决Jenkins部署在非 Mac OS 系统中无法构建mac系统软件，故而引入Jenkins的Master/Slave分布式构建架构。<br>如何添加mac-slave结点：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Step+by+step+guide+to+set+up+master+and+slave+machines" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Step+by+step+guide+to+set+up+master+and+slave+machines</a><br>1.4.2 添加/配置Slave结点<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_node_setting.png" alt=""><br>1.4.3 Slave启动<br>启动slave的四种方式：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds</a><br>对于Slave启动方式, 由于 Mac OS 系统默认支持SSH，所以使用SSH启动更加方便。<br>1.4.4 配置SSH<br>方式1: SSH login with Username&amp;password<br>在”系统管理”-&gt; “Manage Credentials” 里Add Credentials，并选”Username with pasword”<br>“Username”栏应填写Slave结点机器的开机账号，”Password”栏应填写Slave结点机器的开机密码。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_ssh_1.png" alt=""><br>方式2、SSH login without password<br>首先需要生产rsa密钥对，参照 <a href="http://www.linuxproblem.org/art_9.html" target="_blank" rel="external">http://www.linuxproblem.org/art_9.html</a> 生成key。<br>生成key后，在”系统管理”-&gt; “Manage Credentials” 里Add Credentials，并选”SSH Username with private key”<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_ssh_2.png" alt=""><br>1.4.5 创建/配置Slave Job<br>配置Slave Job（如何创建Job在前文中已经说明）<br>勾选中”Restrict where this project can be run”<br>“Label Expression”应填写创建Slave结点时命名的标签（Tag）名称。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_create_job.png" alt=""><br>1.4.6 发布构建好的ipa<br>这个比较多方法，可以放到ftp，也可能放到NFS上，又或者特定的某台机器。我选择的是将通过SCP将构建的IPA拷贝到内部共享的一个服务器上。这也分几步：<br>a、从”系统管理” -&gt; “管理插件” 安装SCP插件<br>b、在”系统管理” -&gt; “系统设置”里的”SCP repository hosts”模块里配置SCP插件，新建一个SCP site “tmp”<br>c、配置ios对应Job，增加一个”构建后操作”,选择”Publish artifacts to SCP Repository”, 并设置SCP site为tmp，然后设置对应文件源及目的地，如Source为”ipa/*.ipa”， Destination为”iPhoneApp/“。<br>1.4.7 Slave Tips<br>使用fastlane的sigh在 mac Slave 结点机器上下载相关配置文件时，无法读取Slave机器Keychain中保存的密码。<br>错误如下：<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_error.png" alt=""><br>解决方法：<br>需要通过命令解锁Slave结点机器的Keychain。<br>security unlock-keychain -p [password] $HOME/Library/Keychains/login.keychain<br>1.5 如果利用Jenkins搭建我们的持续集成框架<br>基于以上介绍，Jenkins环境已经搭建完成，如何使用Jenkins环境搭建我们自己的持续集成环境呢？<br>其实我们自己的持续集成环境很简单，只利用到了Jenkins执行Shell脚本的功能以及邮件通知的功能，再多一点点就是CVS和Git功能。当然Jenkins也可以使用Xcodebuild插件进行iOS程序的打包，但是对于我们产品的特殊性需求，还有就是我个人喜欢使用shell脚本语言编写自动化打包工具。<br><img src="/images/iOS持续集成之Jenkins/Jenkins_shell_excute.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/Jenkins_shell_excute_2.png" alt=""></p>
+<p>参考<br><a href="https://imciel.com/2016/08/27/install-jenkins-tips/" target="_blank" rel="external">https://imciel.com/2016/08/27/install-jenkins-tips/</a></p>
 
           
         
@@ -1653,7 +1673,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">25</span>
+              <span class="site-state-item-count">24</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
