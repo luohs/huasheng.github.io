@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="clang," />
 
 
 
@@ -84,12 +84,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="三味猪屋">
-<meta property="og:url" content="http://yoursite.com/tags/weak/index.html">
+<meta name="description" content="集成第三方库的时候经常会报一些警告，如：1、unable to open object file: No such file or directory因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。解决办法：1231) Go to Build Settings -&amp;gt; Build Options -&amp;gt; Debug Information Fo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="消除第三方library警告">
+<meta property="og:url" content="http://yoursite.com/2017/06/14/20170614/index.html">
 <meta property="og:site_name" content="三味猪屋">
+<meta property="og:description" content="集成第三方库的时候经常会报一些警告，如：1、unable to open object file: No such file or directory因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。解决办法：1231) Go to Build Settings -&amp;gt; Build Options -&amp;gt; Debug Information Fo">
+<meta property="og:image" content="http://yoursite.com/images/20170614/warning_1.png">
+<meta property="og:image" content="http://yoursite.com/images/20170614/clang_enable_modules.png">
+<meta property="og:image" content="http://yoursite.com/images/20170614/warning_2.png">
+<meta property="og:image" content="http://yoursite.com/images/20170614/warning_2_1.jpg">
+<meta property="og:image" content="http://yoursite.com/images/20170614/warning_2_solution.jpg">
+<meta property="og:updated_time" content="2017-06-14T09:39:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="三味猪屋">
+<meta name="twitter:title" content="消除第三方library警告">
+<meta name="twitter:description" content="集成第三方库的时候经常会报一些警告，如：1、unable to open object file: No such file or directory因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。解决办法：1231) Go to Build Settings -&amp;gt; Build Options -&amp;gt; Debug Information Fo">
+<meta name="twitter:image" content="http://yoursite.com/images/20170614/warning_1.png">
 
 
 
@@ -117,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/weak/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/14/20170614/"/>
 
 
 
 
 
-  <title> 标签: weak | 三味猪屋 </title>
+  <title> 消除第三方library警告 | 三味猪屋 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -144,7 +154,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left  ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -244,46 +254,168 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        weak
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/20170614/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                消除第三方library警告
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-14T16:41:18+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/clang/" itemprop="url" rel="index">
+                    <span itemprop="name">clang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>集成第三方库的时候经常会报一些警告，如：<br>1、<code>unable to open object file: No such file or directory</code><br><img src="/images/20170614/warning_1.png" alt=""><br>因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。<br><img src="/images/20170614/clang_enable_modules.png" alt=""><br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1) Go to Build Settings -&gt; Build Options -&gt; Debug Information Format</div><div class="line">2) Change the Debug setting from &quot;DWARF with dSYM File&quot; to &quot;DWARF&quot;</div><div class="line">3) Leave the Release setting at &quot;DWARF with dSYM File&quot;</div></pre></td></tr></table></figure></p>
+<p>但是这不是根本解决办法，根本的还是需要静态库提供者去消除这个警告。</p>
+<p>2、<code>ld: pointer not aligned at address 0x13735E9</code><br><img src="/images/20170614/warning_2.png" alt=""><br><img src="/images/20170614/warning_2_1.jpg" alt=""><br>解决办法：<br><img src="/images/20170614/warning_2_solution.jpg" alt=""></p>
+<p>参考：<br><a href="https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules" target="_blank" rel="external">https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules</a><br><a href="https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194" target="_blank" rel="external">https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2017/05/31/20170532/" itemprop="url">
-              
-                <span itemprop="name">深入理解"weak-strong dance"</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-31T15:09:22+08:00"
-              content="2017-05-31" >
-          05-31
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/clang/" rel="tag"># clang</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/06/02/20170603/" rel="next" title="iOS包大小瘦身方案（二）- 基于clang插件iOS瘦身实践">
+                <i class="fa fa-chevron-left"></i> iOS包大小瘦身方案（二）- 基于clang插件iOS瘦身实践
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -291,6 +423,10 @@
 
 
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
         
@@ -322,7 +458,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">21</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -330,7 +466,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -339,7 +475,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -469,6 +605,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

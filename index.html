@@ -256,6 +256,144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/14/20170614/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="花生-sniper">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/avatar.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="三味猪屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/14/20170614/" itemprop="url">
+                  消除第三方library警告
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-06-14T16:41:18+08:00">
+                2017-06-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/clang/" itemprop="url" rel="index">
+                    <span itemprop="name">clang</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>集成第三方库的时候经常会报一些警告，如：<br>1、<code>unable to open object file: No such file or directory</code><br><img src="/images/20170614/warning_1.png" alt=""><br>因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。<br><img src="/images/20170614/clang_enable_modules.png" alt=""><br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1) Go to Build Settings -&gt; Build Options -&gt; Debug Information Format</div><div class="line">2) Change the Debug setting from &quot;DWARF with dSYM File&quot; to &quot;DWARF&quot;</div><div class="line">3) Leave the Release setting at &quot;DWARF with dSYM File&quot;</div></pre></td></tr></table></figure></p>
+<p>但是这不是根本解决办法，根本的还是需要静态库提供者去消除这个警告。</p>
+<p>2、<code>ld: pointer not aligned at address 0x13735E9</code><br><img src="/images/20170614/warning_2.png" alt=""><br><img src="/images/20170614/warning_2_1.jpg" alt=""><br>解决办法：<br><img src="/images/20170614/warning_2_solution.jpg" alt=""></p>
+<p>参考：<br><a href="https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules" target="_blank" rel="external">https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules</a><br><a href="https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194" target="_blank" rel="external">https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194</a></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/02/20170603/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -360,7 +498,7 @@
 <p>使用clang编译oc文件(载入生成的your-clang-plugin-name.dylib):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/opt/llvm/llvm_build/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator10.0.sdk -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -mios-version-min=8.0 -Xclang -load -Xclang ~/Desktop/your-clang-plugin-name.dylib -Xclang -add-plugin -Xclang your-clang-plugin-name -c ./ocClsDemo.m</div></pre></td></tr></table></figure></p>
 <p>Xcode集成Clang插件:<br>要在Xcode中使用Clang插件，需要Hack Xcode.app。<br><a href="https://raw.githubusercontent.com/kangwang1988/kangwang1988.github.io/master/others/XcodeHacking.zip" target="_blank" rel="external">XcodeHacking.zip</a><br>通过command-line方式或者手动拷贝的方式将XcodeHack拷贝到Xcode目录中，如果Specifications文件不存在则手动创建一个。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo mv HackedClang.xcplugin `xcode-select -print- path`/../PlugIns/Xcode3Core.ideplugin/Contents/SharedSupport/Developer/Library/Xcode/Plug-ins</div><div class="line">sudo mv HackedBuildSystem.xcspec `xcode-select -print- path`/../Developer/Platforms/iPhoneSimulator.platform/Developer/Library/Xcode/Specifications</div></pre></td></tr></table></figure></p>
 <p><img src="/images/20170603/XcodeHack_plugin.png" alt=""><br><img src="/images/20170603/XcodeHack_spec.png" alt=""><br>之后在Xcode-&gt;Target-Build Settings-&gt;Build Options-&gt;Compiler for C/C++/Objective-C选择Clang LLVM Trunk即可使得Xcode使用1生成的的Clang来编译。至于其他的命令行参数，均可以通过Xcode设置完成。<br><img src="/images/20170603/XcodeHack_buildsetting.png" alt=""><br>3、clang插件在Xcode工程的配置：<br><a href="https://github.com/kangwang1988/XcodeZombieCode.git" target="_blank" rel="external">clang插件示例工程</a><br>a、首先通过Xcode将自定义clang插件编译成动态库（dylib）。<br><img src="/images/20170603/clang_plugin_out.png" alt=""><br><img src="/images/20170603/clang_plugin_out_2.png" alt=""><br>b、其次编译生成分析工具XcodeCodeAnalyser<br><img src="/images/20170603/clang_analyzer_out.png" alt=""><br><img src="/images/20170603/clang_analyzer_out_2.png" alt=""><br>c、设置工程<br>使用用户编译的Clang载入ClangPlugin去编译并生成各种中间文件。编译完成之后使用Xcode提供的post_build_action_shell机制调用分析工具，生成最终结果。<br><img src="/images/20170603/post_build_action_shell_1.png" alt=""><br><img src="/images/20170603/post_build_action_shell_2.png" alt=""><br><img src="/images/20170603/post_build_action_shell_script.png" alt=""></p>
-<p>参考：<br><a href="http://blog.mrriddler.com/2017/02/24/Clang插件-Sherlock/" target="_blank" rel="external">http://blog.mrriddler.com/2017/02/24/Clang插件-Sherlock/</a><br><a href="https://lmsgsendnilself.github.io/blog/2017/02/28/clangtojszi-yuan/" target="_blank" rel="external">https://lmsgsendnilself.github.io/blog/2017/02/28/clangtojszi-yuan/</a><br><a href="http://kangwang1988.github.io/tech/2016/11/01/validate-ios-api-using-clang-plugin.html" target="_blank" rel="external">http://kangwang1988.github.io/tech/2016/11/01/validate-ios-api-using-clang-plugin.html</a><br><a href="https://github.com/kangwang1988/XcodeValidAPI" target="_blank" rel="external">https://github.com/kangwang1988/XcodeValidAPI</a><br><a href="http://www.cocoachina.com/ios/20151211/14562.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20151211/14562.html</a><br><a href="http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;mid=2651112096&amp;idx=1&amp;sn=ce8fccce7d5f70e30c078e63e8ea0d15&amp;scene=21#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;mid=2651112096&amp;idx=1&amp;sn=ce8fccce7d5f70e30c078e63e8ea0d15&amp;scene=21#wechat_redirect</a></p>
+<p>参考：<br><a href="http://railsware.com/blog/2014/02/28/creation-and-using-clang-plugin-with-xcode/" target="_blank" rel="external">http://railsware.com/blog/2014/02/28/creation-and-using-clang-plugin-with-xcode/</a><br><a href="http://blog.mrriddler.com/2017/02/24/Clang插件-Sherlock/" target="_blank" rel="external">http://blog.mrriddler.com/2017/02/24/Clang插件-Sherlock/</a><br><a href="https://lmsgsendnilself.github.io/blog/2017/02/28/clangtojszi-yuan/" target="_blank" rel="external">https://lmsgsendnilself.github.io/blog/2017/02/28/clangtojszi-yuan/</a><br><a href="http://kangwang1988.github.io/tech/2016/11/01/validate-ios-api-using-clang-plugin.html" target="_blank" rel="external">http://kangwang1988.github.io/tech/2016/11/01/validate-ios-api-using-clang-plugin.html</a><br><a href="https://github.com/kangwang1988/XcodeValidAPI" target="_blank" rel="external">https://github.com/kangwang1988/XcodeValidAPI</a><br><a href="http://www.cocoachina.com/ios/20151211/14562.html" target="_blank" rel="external">http://www.cocoachina.com/ios/20151211/14562.html</a><br><a href="http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;mid=2651112096&amp;idx=1&amp;sn=ce8fccce7d5f70e30c078e63e8ea0d15&amp;scene=21#wechat_redirect" target="_blank" rel="external">http://mp.weixin.qq.com/s?__biz=MzA3ODg4MDk0Ng==&amp;mid=2651112096&amp;idx=1&amp;sn=ce8fccce7d5f70e30c078e63e8ea0d15&amp;scene=21#wechat_redirect</a></p>
 
           
         
@@ -1492,142 +1630,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/11/iOS持续集成之Jenkins/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="花生-sniper">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.jpg">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="三味猪屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="三味猪屋" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2017/05/11/iOS持续集成之Jenkins/" itemprop="url">
-                  iOS持续集成之Jenkins
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-11T10:48:28+08:00">
-                2017-05-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Jenkins/" itemprop="url" rel="index">
-                    <span itemprop="name">Jenkins</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>之前一篇关于iOS持续集成的文章<a href="https://luohs.github.io/2017/04/21/iOS的自动化打包/" target="_blank" rel="external">iOS的自动化打包</a>，文章主要介绍了iOS编译、签名的理论知识以及如何通过shell脚本调用第三方fastlane或者shell脚本调用Xcode提供的原生编译、签名命令进行打包、签名。<br>本篇介绍如果通过Jenkins构建打包任务、Jenkins远程登录以及Jenkins的Master/Slave架构。<br>1.1 Jenkins安装<br>Jenkins安装有几种方式：<br>a、通过pkg安装包安装<br><a href="https://jenkins.io/content/thank-you-downloading-os-x-installer/#stable" target="_blank" rel="external">https://jenkins.io/content/thank-you-downloading-os-x-installer/#stable</a><br>b、直接下载Jenkins.jar<br><a href="http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war" target="_blank" rel="external">http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war</a><br>c、使用Homebrew安装<br>brew install jenkins<br>三种安装方式的优缺点：<br>a、通过pkg安装包安装：使用pkg安装虽然是一键，但是比较坑的是安装在Shared用户下，这样的话很多本机的配置如SSH key等会有一些权限问题，环境变量使用也不是很方便，一些配置需要在Shared用户上单独配置，好处是干净，但是Xcode已经是在当前用户下了，Shared用户的配置只能干净一部分吧，干脆点，安装在当前用户，不用 Shared用户了。这样很多配置是不用在Jenkins中配置的，如上方所详的SSH key，以及各种环境变量都是在当前用户下，配置好后在Jenkins中不需要再配置。<br>b、直接下载Jenkins.jar：直接运行 jar 是最简单的方式，不能再后台运行，总是开一个终端来运行 Jenkins 万一不小心关掉了就不好了，如果要后台运行，就需要重新开启。<br>c、使用Homebrew安装：使用Homebrew安装Jenkins只需要一条命令，并且不存在以上两种安装方式的缺点，不需要额外配置，开机自动启动Jenkins服务而不需要手动启动。<br>Homebrew安装Jenkins如下：<br><code>brew install jenkins</code><br><img src="/images/iOS持续集成之Jenkins/jenkins_brew_install.png" alt=""><br>安装完成后可以使用 brew services 管理 Jenkins 启动<br>查看帮助说明<br><img src="/images/iOS持续集成之Jenkins/jenkins_services_start.png" alt=""><br>1.2 环境变量配置<br>终端输入以下命令，打开bash_profile文件<br>open ~/.bash_profile<br>主要配置各种环境变量<br>RVM环境变量:/usr/local/rvm/bin<br>ruby环境变量:/usr/local/rvm/rubies/ruby-2.3.0<br><img src="/images/iOS持续集成之Jenkins/jenkins_environment_variables_set.png" alt=""><br>注意<br>1、使用Jenkins调用pod命令报如下错误的解决办法就是在bash_profile中增加export LANG=en_US.UTF-8<br><img src="/images/iOS持续集成之Jenkins/jenkins_error_tips.png" alt=""><br>2、$HOME目录下的配置文件里关于RVM的环境配置<br><img src="/images/iOS持续集成之Jenkins/rvm_bashprofile.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_mkshrc.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_profile.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_bashrc.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/rvm_zshrc.png" alt=""><br>1.3 Jenkins配置<br>启动Jenkins服务之后，在浏览器中输入<br><a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a><br>使用Jenkins默认host和port<br><img src="/images/iOS持续集成之Jenkins/jenkins_setting_1.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_setting_2.png" alt=""><br>1.3.1 修改Jenkins的Host和Port<br>如果是通过brew install Jenkins方式安装的Jenkins时，修改Jenkins的host和port:<br>打开配置文件：/usr/local/opt/jenkins/homebrew.mxcl.jenkins.plist，找到httpListenAddress和httpPort,即为要修改的host和port。<br>1.3.2 如何安装Jenkins默认没有的插件<br>需要去Jenkins plugins官网下载需要的Jenkins插件<br>官网：<a href="https://wiki.jenkins-ci.org/display/JENKINS/Plugins" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Plugins</a><br>例子：<br>例如需要安装Jenkins RVM插件<br>1、rvm插件地址：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/RVM+Plugin" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/RVM+Plugin</a><br>2、下载到本地后，会得到一个rvm.hpi的文件<br>3、插件管理-高级-上传插件-选取文件-上传<br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_1.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_2.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/jenkins_plugin_install_3.png" alt=""><br>1.3.3 Jenkins运行脚本配置<br><img src="/images/iOS持续集成之Jenkins/jenkins_execute_shell.png" alt=""><br>1.4 Jenkins的Master/Slave架构<br>1.4.1 Jenkins的Master/Slave架构<br>Jenkins的Master/Slave架构可以有效解决分布式构建。Master提供web接口让用户来管理job和slave，job可以运行在master本机或者被分配到slave上运行。一个master可以关联多个slave用来为不同的job或相同的job的不同配置来服务。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_architecture.png" alt=""><br>众所周知，开发mac系统软件时，编译环境必须使用 Mac OS系统，为了解决Jenkins部署在非 Mac OS 系统中无法构建mac系统软件，故而引入Jenkins的Master/Slave分布式构建架构。<br>如何添加mac-slave结点：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Step+by+step+guide+to+set+up+master+and+slave+machines" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Step+by+step+guide+to+set+up+master+and+slave+machines</a><br>1.4.2 添加/配置Slave结点<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_node_setting.png" alt=""><br>1.4.3 Slave启动<br>启动slave的四种方式：<br><a href="https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds" target="_blank" rel="external">https://wiki.jenkins-ci.org/display/JENKINS/Distributed+builds</a><br>对于Slave启动方式, 由于 Mac OS 系统默认支持SSH，所以使用SSH启动更加方便。<br>1.4.4 配置SSH<br>方式1: SSH login with Username&amp;password<br>在”系统管理”-&gt; “Manage Credentials” 里Add Credentials，并选”Username with pasword”<br>“Username”栏应填写Slave结点机器的开机账号，”Password”栏应填写Slave结点机器的开机密码。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_ssh_1.png" alt=""><br>方式2、SSH login without password<br>首先需要生产rsa密钥对，参照 <a href="http://www.linuxproblem.org/art_9.html" target="_blank" rel="external">http://www.linuxproblem.org/art_9.html</a> 生成key。<br>生成key后，在”系统管理”-&gt; “Manage Credentials” 里Add Credentials，并选”SSH Username with private key”<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_ssh_2.png" alt=""><br>1.4.5 创建/配置Slave Job<br>配置Slave Job（如何创建Job在前文中已经说明）<br>勾选中”Restrict where this project can be run”<br>“Label Expression”应填写创建Slave结点时命名的标签（Tag）名称。<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_create_job.png" alt=""><br>1.4.6 发布构建好的ipa<br>这个比较多方法，可以放到ftp，也可能放到NFS上，又或者特定的某台机器。我选择的是将通过SCP将构建的IPA拷贝到内部共享的一个服务器上。这也分几步：<br>a、从”系统管理” -&gt; “管理插件” 安装SCP插件<br>b、在”系统管理” -&gt; “系统设置”里的”SCP repository hosts”模块里配置SCP插件，新建一个SCP site “tmp”<br>c、配置ios对应Job，增加一个”构建后操作”,选择”Publish artifacts to SCP Repository”, 并设置SCP site为tmp，然后设置对应文件源及目的地，如Source为”ipa/*.ipa”， Destination为”iPhoneApp/“。<br>1.4.7 Slave Tips<br>使用fastlane的sigh在 mac Slave 结点机器上下载相关配置文件时，无法读取Slave机器Keychain中保存的密码。<br>错误如下：<br><img src="/images/iOS持续集成之Jenkins/jenkins_slave_error.png" alt=""><br>解决方法：<br>需要通过命令解锁Slave结点机器的Keychain。<br>security unlock-keychain -p [password] $HOME/Library/Keychains/login.keychain<br>1.5 如果利用Jenkins搭建我们的持续集成框架<br>基于以上介绍，Jenkins环境已经搭建完成，如何使用Jenkins环境搭建我们自己的持续集成环境呢？<br>其实我们自己的持续集成环境很简单，只利用到了Jenkins执行Shell脚本的功能以及邮件通知的功能，再多一点点就是CVS和Git功能。当然Jenkins也可以使用Xcodebuild插件进行iOS程序的打包，但是对于我们产品的特殊性需求，还有就是我个人喜欢使用shell脚本语言编写自动化打包工具。<br><img src="/images/iOS持续集成之Jenkins/Jenkins_shell_excute.png" alt=""><br><img src="/images/iOS持续集成之Jenkins/Jenkins_shell_excute_2.png" alt=""></p>
-<p>参考<br><a href="https://imciel.com/2016/08/27/install-jenkins-tips/" target="_blank" rel="external">https://imciel.com/2016/08/27/install-jenkins-tips/</a></p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -1673,7 +1675,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -1690,7 +1692,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">20</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
