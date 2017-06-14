@@ -94,8 +94,8 @@
 <meta property="og:image" content="http://yoursite.com/images/20170614/clang_enable_modules.png">
 <meta property="og:image" content="http://yoursite.com/images/20170614/warning_2.png">
 <meta property="og:image" content="http://yoursite.com/images/20170614/warning_2_1.jpg">
-<meta property="og:image" content="http://yoursite.com/images/20170614/warning_2_solution.jpg">
-<meta property="og:updated_time" content="2017-06-14T09:39:15.000Z">
+<meta property="og:image" content="http://yoursite.com/images/20170614/warning_2_solution.png">
+<meta property="og:updated_time" content="2017-06-14T09:47:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="消除第三方library警告">
 <meta name="twitter:description" content="集成第三方库的时候经常会报一些警告，如：1、unable to open object file: No such file or directory因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。解决办法：1231) Go to Build Settings -&amp;gt; Build Options -&amp;gt; Debug Information Fo">
@@ -355,9 +355,9 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><script src="/assets/js/DPlayer.min.js"> </script><p>集成第三方库的时候经常会报一些警告，如：<br>1、<code>unable to open object file: No such file or directory</code><br><img src="/images/20170614/warning_1.png" alt=""><br>因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。<br><img src="/images/20170614/clang_enable_modules.png" alt=""><br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1) Go to Build Settings -&gt; Build Options -&gt; Debug Information Format</div><div class="line">2) Change the Debug setting from &quot;DWARF with dSYM File&quot; to &quot;DWARF&quot;</div><div class="line">3) Leave the Release setting at &quot;DWARF with dSYM File&quot;</div></pre></td></tr></table></figure></p>
+        <script src="/assets/js/DPlayer.min.js"> </script><script src="/assets/js/APlayer.min.js"> </script><p>集成第三方库的时候经常会报一些警告，如：<br>1、<code>unable to open object file: No such file or directory</code><br><img src="/images/20170614/warning_1.png" alt=""><br>因为在build静态lib时，CLANG_ENABLE_MODULES没有被设置成NO。<br><img src="/images/20170614/clang_enable_modules.png" alt=""><br>解决办法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">1) Go to Build Settings -&gt; Build Options -&gt; Debug Information Format</div><div class="line">2) Change the Debug setting from &quot;DWARF with dSYM File&quot; to &quot;DWARF&quot;</div><div class="line">3) Leave the Release setting at &quot;DWARF with dSYM File&quot;</div></pre></td></tr></table></figure></p>
 <p>但是这不是根本解决办法，根本的还是需要静态库提供者去消除这个警告。</p>
-<p>2、<code>ld: pointer not aligned at address 0x13735E9</code><br><img src="/images/20170614/warning_2.png" alt=""><br><img src="/images/20170614/warning_2_1.jpg" alt=""><br>解决办法：<br><img src="/images/20170614/warning_2_solution.jpg" alt=""></p>
+<p>2、<code>ld: pointer not aligned at address 0x13735E9</code><br><img src="/images/20170614/warning_2.png" alt=""><br><img src="/images/20170614/warning_2_1.jpg" alt=""><br>解决办法：<br><img src="/images/20170614/warning_2_solution.png" alt=""></p>
 <p>参考：<br><a href="https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules" target="_blank" rel="external">https://pewpewthespells.com/blog/buildsettings.html#clang_enable_modules</a><br><a href="https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194" target="_blank" rel="external">https://stackoverflow.com/questions/42268117/how-to-remove-the-xcode-warning-apple-mach-o-linker-warning-pointer-not-aligned/43056194#43056194</a></p>
 
       
